@@ -19,48 +19,57 @@
             <a href="levels.html" class="nav-btn">Levels</a>
         </div>
 
-        <div class="stats-grid" id="stats-container">
-            <div class="stat-card" style="grid-column: span 2; color: var(--text-muted);">Loading player stats from GD Browser...</div>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Stat Type</th>
+                    <th>Current Record</th>
+                </tr>
+            </thead>
+            <tbody id="stats-table-body">
+                <tr>
+                    <td colspan="2" style="text-align: center; color: var(--text-muted);">Syncing live player metrics from GD Browser...</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <script src="demonlist-data.js"></script>
     <script>
         window.onload = function() {
             initGlobalLayout();
-            const container = document.getElementById('stats-container');
+            const tbody = document.getElementById('stats-table-body');
 
-            // Hit the official GDBrowser profile parser engine
             fetch(`https://gdbrowser.com/api/profile/${DATA.gdUsername}`)
                 .then(res => res.json())
                 .then(player => {
                     if (!player || player.error) {
-                        container.innerHTML = `<div class="stat-card" style="grid-column:span 2; color:#ef4444;">User profile data could not be retrieved.</div>`;
+                        tbody.innerHTML = `<tr><td colspan="2" style="text-align:center; color:#ef4444;">Could not sync player data.</td></tr>`;
                         return;
                     }
                     
-                    // Map out the targeted profile metrics variables
-                    const trackedStats = {
-                        "Stars": player.stars || 0,
-                        "Diamonds": player.diamonds || 0,
-                        "Secret Coins": player.coins || 0,
-                        "User Coins": player.userCoins || 0,
-                        "Demons Beaten": player.demons || 0,
-                        "Creator Points": player.cp || 0,
-                        "Global Rank": player.rank ? `#${player.rank}` : "Unranked"
-                    };
+                    // Organize tracking rows into your clean, classic table layout structure
+                    const trackedStats = [
+                        { name: "Stars", value: player.stars || 0 },
+                        { name: "Diamonds", value: player.diamonds || 0 },
+                        { name: "Secret Coins", value: player.coins || 0 },
+                        { name: "User Coins", value: player.userCoins || 0 },
+                        { name: "Demons Beaten", value: player.demons || 0 },
+                        { name: "Creator Points", value: player.cp || 0 },
+                        { name: "Global Rank", value: player.rank ? `#${player.rank.toLocaleString()}` : "Unranked" }
+                    ];
 
-                    container.innerHTML = '';
-                    Object.entries(trackedStats).forEach(([key, val]) => {
-                        container.innerHTML += `
-                            <div class="stat-card">
-                                <h4>${key}</h4>
-                                <p>${val}</p>
-                            </div>`;
+                    tbody.innerHTML = '';
+                    trackedStats.forEach(stat => {
+                        tbody.innerHTML += `
+                            <tr>
+                                <td class="level-name">${stat.name}</td>
+                                <td style="font-weight: bold; color: #fff;">${stat.value}</td>
+                            </tr>`;
                     });
                 })
                 .catch(err => {
-                    container.innerHTML = `<div class="stat-card" style="grid-column:span 2; color:#ef4444;">Error connecting to GD Browser servers.</div>`;
+                    tbody.innerHTML = `<tr><td colspan="2" style="text-align:center; color:#ef4444;">Connection error to GD Browser servers.</td></tr>`;
                 });
         };
     </script>
