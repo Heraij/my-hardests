@@ -5,7 +5,7 @@ const DATA = {
     // Added this link parameter for the GD Browser API to fetch your data
     gdUsername: "CreatorPLUS100",
 
-    latestVideo: "https://www.youtube.com/watch?v=M61Vqi6ryj8",
+    latestVideo: "https://www.youtube.com/watch?v=Fsy7RC4VagU",
     
     goals: [
         { text: "Have 10 subscribers on YT", completed: false },
