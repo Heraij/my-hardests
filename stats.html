@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Statistics</title>
+    <title>Stats</title>
     <link rel="stylesheet" href="style.css">
     <style>
         /* Panel layout alignment rules */
@@ -89,15 +89,15 @@
         <!-- The core structural stats layout area -->
         <div class="stats-panel-layout" id="stats-panel-container">
             <div class="stat-panel" style="color: var(--text-muted);">
-                Fetching your live GD account details...
+                Getting em numbies...
             </div>
         </div>
 
         <!-- Rebuilt Socials section into matching panels -->
-        <h3 style="margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Connect With Me</h3>
+        <h3 style="margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Socials:</h3>
         <div class="socials-panel-layout" id="socials-panel-container"></div>
 
-        <h3 style="text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Most Recent Profile Post</h3>
+        <h3 style="text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Recent Post:</h3>
         <div id="profile-post-container" class="post-panel">Loading post...</div>
     </div>
 
@@ -143,168 +143,7 @@
 
             // 2. Parse custom platforms array into cleanly split row side panels
             scBox.innerHTML = '';
-            const targetedSocials = DATA.socials ? DATA.socials : { "YouTube": "@HeraijsGD", "Discord": "heraijs_xyz" };
-            
-            // This groups your social entries side-by-side into pairs beautifully
-            let socialHtml = '<div class="panel-row-split">';
-            Object.entries(targetedSocials).forEach(([platform, handle]) => {
-                socialHtml += `
-                    <div class="social-panel">
-                        <h4>${platform.toUpperCase()}</h4>
-                        <p>${handle}</p>
-                    </div>`;
-            });
-            socialHtml += '</div>';
-            scBox.innerHTML = socialHtml;
-        };
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Statistics</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Panel layout alignment rules */
-        .stats-panel-layout, .socials-panel-layout {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 2.5rem;
-        }
-
-        /* Two panels splitting a row evenly */
-        .panel-row-split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        /* Individual little data and social panels */
-        .stat-panel, .social-panel {
-            background-color: #181b22;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.2rem;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-
-        .stat-panel:hover, .social-panel:hover {
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        .stat-panel h4, .social-panel h4 {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-panel p, .social-panel p {
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: #fff;
-        }
-        
-        /* Subtle text style adjustment for social handles */
-        .social-panel p {
-            font-size: 1.3rem;
-            color: var(--accent-color);
-        }
-
-        /* The custom panel box for your live feed post */
-        .post-panel {
-            background-color: #14161d;
-            border: 1px dashed var(--border-color);
-            padding: 1.5rem;
-            border-radius: 8px;
-            color: #fff;
-            font-style: italic;
-            margin-top: 0.5rem;
-            line-height: 1.5;
-            text-align: center;
-            font-size: 1.05rem;
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.4);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1 id="user-name"></h1>
-            <p id="user-desc"></p>
-        </header>
-
-        <div class="nav-menu">
-            <a href="index.html" class="nav-btn">Main</a>
-            <a href="list.html" class="nav-btn">List</a>
-            <a href="stats.html" class="nav-btn active">Stats</a>
-            <a href="levels.html" class="nav-btn">Levels</a>
-        </div>
-
-        <!-- The core structural stats layout area -->
-        <div class="stats-panel-layout" id="stats-panel-container">
-            <div class="stat-panel" style="color: var(--text-muted);">
-                Fetching your live GD account details...
-            </div>
-        </div>
-
-        <!-- Rebuilt Socials section into matching panels -->
-        <h3 style="margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Connect With Me</h3>
-        <div class="socials-panel-layout" id="socials-panel-container"></div>
-
-        <h3 style="text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Most Recent Profile Post</h3>
-        <div id="profile-post-container" class="post-panel">Loading post...</div>
-    </div>
-
-    <script src="demonlist-data.js"></script>
-    <script>
-        window.onload = function() {
-            initGlobalLayout();
-            const panelContainer = document.getElementById('stats-panel-container');
-            const postBox = document.getElementById('profile-post-container');
-            const scBox = document.getElementById('socials-panel-container');
-
-            // 1. Fetch live data values from the GD Browser API
-            fetch(`https://gdbrowser.com/api/profile/${DATA.gdUsername}`)
-                .then(res => res.json())
-                .then(player => {
-                    if (!player || player.error) {
-                        panelContainer.innerHTML = `<div class="stat-panel" style="color: #ef4444;">Failed to sync statistics panels.</div>`;
-                        postBox.textContent = "Unavailable";
-                        return;
-                    }
-
-                    // Render game statistics panels
-                    panelContainer.innerHTML = `
-                        <div class="panel-row-split">
-                            <div class="stat-panel"><h4>Stars</h4><p>${player.stars || 0}</p></div>
-                            <div class="stat-panel"><h4>Moons</h4><p>${player.moons || 0}</p></div>
-                        </div>
-                        <div class="stat-panel"><h4>Demons</h4><p>${player.demons || 0}</p></div>
-                        <div class="stat-panel"><h4>Creator Points</h4><p>${player.cp || 0}</p></div>
-                        <div class="panel-row-split">
-                            <div class="stat-panel"><h4>Main Coins</h4><p>${player.coins || 0}</p></div>
-                            <div class="stat-panel"><h4>User Coins</h4><p>${player.userCoins || 0}</p></div>
-                        </div>
-                    `;
-
-                    // Render live game comment string
-                    postBox.textContent = player.post ? `"${player.post}"` : "No recent profile updates found.";
-                })
-                .catch(err => {
-                    panelContainer.innerHTML = `<div class="stat-panel" style="color: #ef4444;">Error connecting to server.</div>`;
-                    postBox.textContent = "Error updating database feed.";
-                });
-
-            // 2. Parse custom platforms array into cleanly split row side panels
-            scBox.innerHTML = '';
-            const targetedSocials = DATA.socials ? DATA.socials : { "YouTube": "@HeraijsGD", "Discord": "heraijs_xyz" };
+            const targetedSocials = DATA.socials ? DATA.socials : { "YouTube": "@CreatorPlusGD", "Discord": "@Heraij" };
             
             // This groups your social entries side-by-side into pairs beautifully
             let socialHtml = '<div class="panel-row-split">';
