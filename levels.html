@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Completed Levels</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="user-name"></h1>
+            <p id="user-desc"></p>
+        </header>
+
+        <div class="nav-menu">
+            <a href="index.html" class="nav-btn">Main</a>
+            <a href="list.html" class="nav-btn">List</a>
+            <a href="stats.html" class="nav-btn">Stats</a>
+            <a href="levels.html" class="nav-btn active">Levels</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Level Name</th>
+                    <th>Creator</th>
+                    <th>Difficulty</th>
+                </tr>
+            </thead>
+            <tbody id="all-levels-body"></tbody>
+        </table>
+
+        <div class="goals-section">
+            <h3>🎯 Upcoming Goals</h3>
+            <div id="goals-container"></div>
+        </div>
+    </div>
+
+    <script src="demonlist-data.js"></script>
+    <script>
+        window.onload = function() {
+            initGlobalLayout();
+            const tbody = document.getElementById('all-levels-body');
+            const sorted = [...DATA.demonlist].sort((a, b) => a.level.localeCompare(b.level));
+            sorted.forEach(item => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="level-name">${item.level}</td>
+                        <td class="creator-name">by ${item.creator}</td>
+                        <td>${item.difficulty}</td>
+                    </tr>`;
+            });
+        };
+    </script>
+</body>
+</html>
