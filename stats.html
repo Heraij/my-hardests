@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Statistics</title>
+    <title>Creator+</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,10 +21,10 @@
 
         <!-- This keeps your precise original layout container structure -->
         <div class="stats-grid" id="stats-container" style="margin-bottom: 2.5rem;">
-            <div class="stat-card" style="grid-column: span 2; color: var(--text-muted);">Syncing live numbers...</div>
+            <div class="stat-card" style="grid-column: span 2; color: var(--text-muted);">Getting numbers...</div>
         </div>
 
-        <h3 style="margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Connect With Me</h3>
+        <h3 style="margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Socials:</h3>
         <div class="socials-list" id="socials-container"></div>
     </div>
 
@@ -74,7 +74,7 @@
                 });
             } else {
                 // Quick placeholders in case you haven't written the object keys yet
-                const defaultSocials = { "YouTube": "@HeraijsGD", "Discord": "heraijs_xyz" };
+                const defaultSocials = { "YouTube": "@creatorplusgd", "Discord": "@heraij" };
                 Object.entries(defaultSocials).forEach(([p, u]) => {
                     scBox.innerHTML += `<div class="social-item">${p.toUpperCase()}<span>${u}</span></div>`;
                 });
