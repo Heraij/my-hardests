@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Hardests List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="user-name"></h1>
+            <p id="user-desc"></p>
+        </header>
+
+        <div class="nav-menu">
+            <a href="index.html" class="nav-btn">Main</a>
+            <a href="list.html" class="nav-btn active">List</a>
+            <a href="stats.html" class="nav-btn">Stats</a>
+            <a href="levels.html" class="nav-btn">Levels</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="text-align: center;">Rank</th>
+                    <th>Level / Creator</th>
+                    <th>Showcase</th>
+                </tr>
+            </thead>
+            <tbody id="demonlist-body"></tbody>
+        </table>
+        <div class="disclaimer-note">I don't have completion videos for these so just Trust me bro.</div>
+
+        <div class="goals-section">
+            <h3>🎯 Upcoming Goals</h3>
+            <div id="goals-container"></div>
+        </div>
+    </div>
+
+    <script src="demonlist-data.js"></script>
+    <script>
+        window.onload = function() {
+            initGlobalLayout();
+            const tbody = document.getElementById('demonlist-body');
+            DATA.demonlist.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                let diffHtml = '';
+                if (item.difficulty) {
+                    const clean = item.difficulty.toLowerCase().trim();
+                    let gClass = clean === 'easy demon' ? 'easy-demon' : clean === 'medium demon' ? 'medium-demon' : '';
+                    diffHtml = ` • <span class="diff-tag ${gClass}">${item.difficulty}</span>`;
+                }
+                const vId = getYouTubeId(item.video);
+                const thumb = vId ? `<img src="https://img.youtube.com/vi/${vId}/mqdefault.jpg" class="yt-thumb">` : '';
+                const btn = item.video ? `<a href="${item.video}" target="_blank" class="video-link">Watch</a>` : `<span class="no-link">—</span>`;
+
+                tr.innerHTML = `
+                    <td class="rank-col">#${index + 1}</td>
+                    <td><div class="level-name">${item.level}</div><div class="creator-name">by ${item.creator}${diffHtml}</div></td>
+                    <td><div class="showcase-cell">${thumb}${btn}</div></td>`;
+                tbody.appendChild(tr);
+            });
+        };
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Hardests List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="user-name"></h1>
+            <p id="user-desc"></p>
+        </header>
+
+        <div class="nav-menu">
+            <a href="index.html" class="nav-btn">Main</a>
+            <a href="list.html" class="nav-btn active">List</a>
+            <a href="stats.html" class="nav-btn">Stats</a>
+            <a href="levels.html" class="nav-btn">Levels</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="text-align: center;">Rank</th>
+                    <th>Level / Creator</th>
+                    <th>Showcase</th>
+                </tr>
+            </thead>
+            <tbody id="demonlist-body"></tbody>
+        </table>
+        <div class="disclaimer-note">I don't have completion videos for these so just Trust me bro.</div>
+
+        <div class="goals-section">
+            <h3>🎯 Upcoming Goals</h3>
+            <div id="goals-container"></div>
+        </div>
+    </div>
+
+    <script src="demonlist-data.js"></script>
+    <script>
+        window.onload = function() {
+            initGlobalLayout();
+            const tbody = document.getElementById('demonlist-body');
+            DATA.demonlist.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                let diffHtml = '';
+                if (item.difficulty) {
+                    const clean = item.difficulty.toLowerCase().trim();
+                    let gClass = clean === 'easy demon' ? 'easy-demon' : clean === 'medium demon' ? 'medium-demon' : '';
+                    diffHtml = ` • <span class="diff-tag ${gClass}">${item.difficulty}</span>`;
+                }
+                const vId = getYouTubeId(item.video);
+                const thumb = vId ? `<img src="https://img.youtube.com/vi/${vId}/mqdefault.jpg" class="yt-thumb">` : '';
+                const btn = item.video ? `<a href="${item.video}" target="_blank" class="video-link">Watch</a>` : `<span class="no-link">—</span>`;
+
+                tr.innerHTML = `
+                    <td class="rank-col">#${index + 1}</td>
+                    <td><div class="level-name">${item.level}</div><div class="creator-name">by ${item.creator}${diffHtml}</div></td>
+                    <td><div class="showcase-cell">${thumb}${btn}</div></td>`;
+                tbody.appendChild(tr);
+            });
+        };
+    </script>
+</body>
+</html>
