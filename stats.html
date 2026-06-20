@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Statistics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="user-name"></h1>
+            <p id="user-desc"></p>
+        </header>
+
+        <div class="nav-menu">
+            <a href="index.html" class="nav-btn">Main</a>
+            <a href="list.html" class="nav-btn">List</a>
+            <a href="stats.html" class="nav-btn active">Stats</a>
+            <a href="levels.html" class="nav-btn">Levels</a>
+        </div>
+
+        <div class="stats-grid" id="stats-container" style="margin-bottom: 2.5rem;"></div>
+
+        <h3 style="margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Connect With Me</h3>
+        <div class="socials-list" id="socials-container"></div>
+
+        <div class="goals-section">
+            <h3>🎯 Upcoming Goals</h3>
+            <div id="goals-container"></div>
+        </div>
+    </div>
+
+    <script src="demonlist-data.js"></script>
+    <script>
+        window.onload = function() {
+            initGlobalLayout();
+            const sBox = document.getElementById('stats-container');
+            Object.entries(DATA.stats).forEach(([k, v]) => {
+                sBox.innerHTML += `<div class="stat-card"><h4>${k}</h4><p>${v}</p></div>`;
+            });
+            const scBox = document.getElementById('socials-container');
+            Object.entries(DATA.socials).forEach(([p, u]) => {
+                scBox.innerHTML += `<div class="social-item">${p.toUpperCase()}<span>${u}</span></div>`;
+            });
+        };
+    </script>
+</body>
+</html>
