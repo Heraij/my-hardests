@@ -99,7 +99,7 @@ header p {
     box-shadow: 0 0 12px var(--accent-glow);
 }
 
-/* --- List & Tables --- */
+/* --- List Tables --- */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -173,60 +173,7 @@ tr:nth-child(3) .rank-col { color: #cd7f32; text-shadow: 0 0 8px rgba(205, 127, 
 .no-link { color: var(--text-muted); font-style: italic; }
 .disclaimer-note { margin-top: 1.5rem; text-align: center; font-size: 0.9rem; color: var(--text-muted); font-style: italic; }
 
-/* --- Stats Cards Layout --- */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-
-.stat-card {
-    background-color: #181b22;
-    border: 1px solid var(--border-color);
-    padding: 1.5rem;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.stat-card h4 {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    letter-spacing: 1px;
-}
-
-.stat-card p {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #fff;
-}
-
-/* --- Socials List Layout --- */
-.socials-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.social-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #181b22;
-    border: 1px solid var(--border-color);
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    text-decoration: none;
-    color: #fff;
-    font-weight: 600;
-    transition: border-color 0.2s;
-}
-
-.social-item:hover { border-color: var(--accent-color); }
-.social-item span { color: var(--text-muted); font-weight: normal; }
-
-/* --- Static Bottom Goals Component --- */
+/* --- Bottom Goals Section Layout --- */
 .goals-section {
     margin-top: 1rem;
     border-top: 1px solid var(--border-color);
