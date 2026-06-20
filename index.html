@@ -4,6 +4,38 @@
     <meta charset="UTF-8">
     <title>Creator+ Hub</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Responsive 16:9 Video Embed Box */
+        .featured-video-section {
+            margin: 2rem 0;
+        }
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .video-error {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background: #14161d;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -15,18 +47,49 @@
         <div class="nav-menu">
             <a href="index.html" class="nav-btn active">Main</a>
             <a href="list.html" class="nav-btn">List</a>
-            <a href="stats.html" class = "nav-btn">Stats</a>
+            <a href="stats.html" class="nav-btn">Stats</a>
             <a href="levels.html" class="nav-btn">Levels</a>
         </div>
 
-        <!-- The goals panel is isolated solely to this page -->
+        <!-- Big Video Embed Section -->
+        <div class="featured-video-section">
+            <h3 style="margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">📺 Latest Video</h3>
+            <div class="video-wrapper" id="featured-video-container">
+                <div class="video-error">Loading video frame...</div>
+            </div>
+        </div>
+
         <div class="goals-section">
-            <h3>Upcoming Goals:</h3>
+            <h3>Upcoming Goals</h3>
             <div id="goals-container"></div>
         </div>
     </div>
 
     <script src="demonlist-data.js"></script>
-    <script>window.onload = initGlobalLayout;</script>
+    <script>
+        window.onload = function() {
+            // 1. Run your core profile layout name/desc generator
+            initGlobalLayout();
+
+            // 2. Fetch the target tracking link source configuration
+            const videoContainer = document.getElementById('featured-video-container');
+            
+            // Checks if you have a custom latestVideo key, otherwise defaults to your top list completion video
+            const videoUrl = DATA.latestVideo || (DATA.demonlist && DATA.demonlist[0] ? DATA.demonlist[0].video : null);
+            const videoId = getYouTubeId(videoUrl);
+
+            if (videoId) {
+                videoContainer.innerHTML = `
+                    <iframe 
+                        src="https://www.youtube.com/embed/${videoId}" 
+                        title="Newest vid" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>`;
+            } else {
+                videoContainer.innerHTML = `<div class="video-error">No recent showcase video linked.</div>`;
+            }
+        };
+    </script>
 </body>
 </html>
