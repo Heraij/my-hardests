@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Statistics</title>
+    <title>Live Stats</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,14 +19,8 @@
             <a href="levels.html" class="nav-btn">Levels</a>
         </div>
 
-        <div class="stats-grid" id="stats-container" style="margin-bottom: 2.5rem;"></div>
-
-        <h3 style="margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Connect With Me</h3>
-        <div class="socials-list" id="socials-container"></div>
-
-        <div class="goals-section">
-            <h3>🎯 Upcoming Goals</h3>
-            <div id="goals-container"></div>
+        <div class="stats-grid" id="stats-container">
+            <div class="stat-card" style="grid-column: span 2; color: var(--text-muted);">Loading player stats from GD Browser...</div>
         </div>
     </div>
 
@@ -34,14 +28,40 @@
     <script>
         window.onload = function() {
             initGlobalLayout();
-            const sBox = document.getElementById('stats-container');
-            Object.entries(DATA.stats).forEach(([k, v]) => {
-                sBox.innerHTML += `<div class="stat-card"><h4>${k}</h4><p>${v}</p></div>`;
-            });
-            const scBox = document.getElementById('socials-container');
-            Object.entries(DATA.socials).forEach(([p, u]) => {
-                scBox.innerHTML += `<div class="social-item">${p.toUpperCase()}<span>${u}</span></div>`;
-            });
+            const container = document.getElementById('stats-container');
+
+            // Hit the official GDBrowser profile parser engine
+            fetch(`https://gdbrowser.com/api/profile/${DATA.gdUsername}`)
+                .then(res => res.json())
+                .then(player => {
+                    if (!player || player.error) {
+                        container.innerHTML = `<div class="stat-card" style="grid-column:span 2; color:#ef4444;">User profile data could not be retrieved.</div>`;
+                        return;
+                    }
+                    
+                    // Map out the targeted profile metrics variables
+                    const trackedStats = {
+                        "Stars": player.stars || 0,
+                        "Diamonds": player.diamonds || 0,
+                        "Secret Coins": player.coins || 0,
+                        "User Coins": player.userCoins || 0,
+                        "Demons Beaten": player.demons || 0,
+                        "Creator Points": player.cp || 0,
+                        "Global Rank": player.rank ? `#${player.rank}` : "Unranked"
+                    };
+
+                    container.innerHTML = '';
+                    Object.entries(trackedStats).forEach(([key, val]) => {
+                        container.innerHTML += `
+                            <div class="stat-card">
+                                <h4>${key}</h4>
+                                <p>${val}</p>
+                            </div>`;
+                    });
+                })
+                .catch(err => {
+                    container.innerHTML = `<div class="stat-card" style="grid-column:span 2; color:#ef4444;">Error connecting to GD Browser servers.</div>`;
+                });
         };
     </script>
 </body>
