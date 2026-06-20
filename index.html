@@ -2,299 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demonlist - Creator+</title>
-    <style>
-        :root {
-            --bg-color: #0a0b0d;
-            --container-bg: #111317;
-            --accent-color: #5865F2;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --border-color: #1f2937;
-            --row-hover: #16191f;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            padding: 2rem 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 850px;
-            background-color: var(--container-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 1.5rem;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 10px rgba(88, 101, 242, 0.4);
-        }
-
-        header p {
-            color: var(--text-muted);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        th {
-            background-color: #181b22;
-            color: var(--text-muted);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            padding: 1rem;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.95rem;
-            vertical-align: middle;
-        }
-
-        tr:hover td {
-            background-color: var(--row-hover);
-        }
-
-        .rank-col {
-            font-weight: bold;
-            font-size: 1.1rem;
-            width: 80px;
-            text-align: center;
-        }
-
-        tr:nth-child(1) .rank-col { color: #ffd700; text-shadow: 0 0 8px rgba(255, 215, 0, 0.4); }
-        tr:nth-child(2) .rank-col { color: #c0c0c0; text-shadow: 0 0 8px rgba(192, 192, 192, 0.4); }
-        tr:nth-child(3) .rank-col { color: #cd7f32; text-shadow: 0 0 8px rgba(205, 127, 50, 0.4); }
-
-        .level-name {
-            font-weight: 600;
-            color: #fff;
-        }
-
-        .creator-name {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* --- Custom Difficulty Text Gradients --- */
-        .diff-tag {
-            font-weight: bold;
-            display: inline-block;
-            background-size: 100%;
-            -webkit-background-clip: text;
-            -moz-background-clip: text;
-            -webkit-text-fill-color: transparent; 
-            -moz-text-fill-color: transparent;
-        }
-
-        .easy-demon {
-            background-image: linear-gradient(45deg, #5c3f70, #51438c);
-        }
-
-        .medium-demon {
-            background-image: linear-gradient(45deg, #9b3f9e, #b33992);
-        }
-
-        .hard-demon {
-            background-image: linear-gradient(45deg, #ba2d2d, #ba2d50);
-        }
-
-        /* --- Showcase Column Flexbox --- */
-        .showcase-cell {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            justify-content: flex-start;
-        }
-
-        /* --- Thumbnail Styling --- */
-        .yt-thumb {
-            width: 80px;
-            height: 45px;
-            object-fit: cover;
-            border-radius: 6px; /* Smooth rounded corners */
-            border: 1px solid var(--border-color);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        }
-
-        .video-link {
-            display: inline-block;
-            background-color: #3b6770;
-            color: white;
-            text-decoration: none;
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
-
-        .video-link:hover {
-            background-color: #3aabc2;
-        }
-        
-        .no-link {
-            color: var(--text-muted);
-            font-style: italic;
-        }
-
-        .disclaimer-note {
-            margin-top: 1.5rem;
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            font-style: italic;
-        }
-
-        .error-msg {
-            color: #ef4444;
-            text-align: center;
-            padding: 2rem;
-            font-weight: bold;
-        }
-    </style>
+    <title>Heraijs Hub</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="container">
         <header>
-            <h1>Pluslist</h1>
-            <p>My hardest completions ranked - made with Gemini</p>
+            <h1 id="user-name"></h1>
+            <p id="user-desc"></p>
         </header>
 
-        <table>
-            <thead>
-                <tr>
-                    <th style="text-align: center;">Rank</th>
-                    <th>Level / Creator</th>
-                    <th>Showcase</th>
-                </tr>
-            </thead>
-            <tbody id="demonlist-body">
-            </tbody>
-        </table>
+        <div class="nav-menu">
+            <a href="index.html" class="nav-btn active">Main</a>
+            <a href="list.html" class="nav-btn">List</a>
+            <a href="stats.html" class="nav-btn">Stats</a>
+            <a href="levels.html" class="nav-btn">Levels</a>
+        </div>
 
-        <div class="disclaimer-note">
-            I don't have completion videos for these so just Trust me bro.
+        <div style="text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 1.2rem;">
+            ← Select a tab above to browse my record index profiles.
+        </div>
+
+        <div class="goals-section">
+            <h3>🎯 Upcoming Goals</h3>
+            <div id="goals-container"></div>
         </div>
     </div>
 
     <script src="demonlist-data.js"></script>
-
-    <script>
-        // Helper function to pull the video ID out of YouTube links
-        function getYouTubeId(url) {
-            if (!url) return null;
-            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-            const match = url.match(regExp);
-            return (match && match[2].length === 11) ? match[2] : null;
-        }
-
-        function renderTable() {
-            const tbody = document.getElementById('demonlist-body');
-            
-            if (typeof DEMONLIST_DATA === 'undefined' || !Array.isArray(DEMONLIST_DATA)) {
-                tbody.innerHTML = `<tr><td colspan="3" class="error-msg">Error: Could not find demonlist-data.js or data format is incorrect!</td></tr>`;
-                return;
-            }
-
-            tbody.innerHTML = '';
-
-            DEMONLIST_DATA.forEach((item, index) => {
-                const tr = document.createElement('tr');
-                
-                // Rank
-                const rankTd = document.createElement('td');
-                rankTd.className = 'rank-col';
-                rankTd.textContent = `#${index + 1}`;
-                tr.appendChild(rankTd);
-
-                // Level & Creator + Gradient Logic
-                const infoTd = document.createElement('td');
-                
-                let diffHtml = '';
-                if (item.difficulty) {
-                    const cleanDiff = item.difficulty.toLowerCase().trim();
-                    let gradientClass = '';
-                    
-                    if (cleanDiff === 'easy demon') gradientClass = 'easy-demon';
-                    else if (cleanDiff === 'medium demon') gradientClass = 'medium-demon';
-                    else if (cleanDiff === 'hard demon') gradientClass = 'hard-demon';
-                    
-                    if (gradientClass) {
-                        diffHtml = ` • <span class="diff-tag ${gradientClass}">${item.difficulty}</span>`;
-                    } else {
-                        diffHtml = ` • ${item.difficulty}`;
-                    }
-                }
-
-                infoTd.innerHTML = `
-                    <div class="level-name">${item.level || 'Unknown'}</div>
-                    <div class="creator-name">by ${item.creator || 'Unknown'}${diffHtml}</div>
-                `;
-                tr.appendChild(infoTd);
-
-                // Showcase Column (Thumbnail + Button)
-                const videoTd = document.createElement('td');
-                if (item.video && item.video.trim() !== "") {
-                    const videoId = getYouTubeId(item.video);
-                    let thumbHtml = '';
-                    
-                    // If a valid ID is found, construct the image element
-                    if (videoId) {
-                        thumbHtml = `<img src="https://img.youtube.com/vi/${videoId}/mqdefault.jpg" class="yt-thumb" alt="Thumbnail">`;
-                    }
-                    
-                    videoTd.innerHTML = `
-                        <div class="showcase-cell">
-                            ${thumbHtml}
-                            <a href="${item.video}" target="_blank" class="video-link">Watch</a>
-                        </div>
-                    `;
-                } else {
-                    videoTd.innerHTML = `<span class="no-link">—</span>`;
-                }
-                tr.appendChild(videoTd);
-
-                tbody.appendChild(tr);
-            });
-        }
-
-        window.onload = renderTable;
-    </script>
+    <script>window.onload = initGlobalLayout;</script>
 </body>
 </html>
