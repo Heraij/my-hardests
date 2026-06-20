@@ -1,6 +1,9 @@
 const DATA = {
     profileName: "Creator+",
-    description: "I have been playing this silly cube game for the past 4-5 years of my life. :3",
+    description: "Welcome to my personal hub. Tracking my Geometry Dash progression, hardest completions, and content creation milestones all in one place.",
+    
+    // Added this link parameter for the GD Browser API to fetch your data
+    gdUsername: "CreatorPLUS100",
     
     goals: [
         { text: "Have 10 subscribers on YT", completed: false },
