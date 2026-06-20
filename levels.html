@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>My Levels</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Makes the entire row clearly indicate it's an openable link */
+        .clickable-row { cursor: pointer; }
+        .clickable-row:hover td { background-color: var(--row-hover) !important; }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -40,7 +45,6 @@
             initGlobalLayout();
             const tbody = document.getElementById('all-levels-body');
 
-            // Scan Geometry Dash global listing matching your username filter
             fetch(`https://gdbrowser.com/api/search/${DATA.gdUsername}?user`)
                 .then(res => res.json())
                 .then(levels => {
@@ -52,13 +56,22 @@
                     tbody.innerHTML = '';
                     levels.forEach(lvl => {
                         const starsText = lvl.stars > 0 ? ` (${lvl.stars}★)` : '';
-                        tbody.innerHTML += `
-                            <tr>
-                                <td class="level-name">${lvl.name} <span style="font-size:0.8rem; color:var(--text-muted);">ID: ${lvl.id}</span></td>
-                                <td class="creator-name">${lvl.downloads.toLocaleString()}</td>
-                                <td class="creator-name" style="color: #4ade80;">${lvl.likes.toLocaleString()}</td>
-                                <td style="font-weight:600; color:#fff;">${lvl.difficulty}${starsText}</td>
-                            </tr>`;
+                        
+                        // Create row element manually to hook up cleanly with an open window tab command
+                        const tr = document.createElement('tr');
+                        tr.className = 'clickable-row';
+                        tr.title = "Click to view on GD Browser";
+                        tr.onclick = function() {
+                            window.open(`https://gdbrowser.com/${lvl.id}`, '_blank');
+                        };
+
+                        tr.innerHTML = `
+                            <td class="level-name">${lvl.name} <span style="font-size:0.8rem; color:var(--text-muted); display:block; margin-top:2px;">ID: ${lvl.id}</span></td>
+                            <td class="creator-name">${lvl.downloads.toLocaleString()}</td>
+                            <td class="creator-name" style="color: #4ade80;">${lvl.likes.toLocaleString()}</td>
+                            <td style="font-weight:600; color:#fff;">${lvl.difficulty}${starsText}</td>
+                        `;
+                        tbody.appendChild(tr);
                     });
                 })
                 .catch(err => {
