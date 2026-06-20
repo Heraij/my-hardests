@@ -2,28 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Stats</title>
+    <title>My Statistics</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* custom grid layout to match your exact block representation */
-        .gd-stats-board {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        /* Panel layout alignment rules */
+        .stats-panel-layout {
+            display: flex;
+            flex-direction: column;
             gap: 15px;
             margin-bottom: 2.5rem;
         }
-        .full-width {
-            grid-column: span 2;
+
+        /* Two panels splitting a row evenly */
+        .panel-row-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
-        .profile-post-box {
+
+        /* Individual little data panels */
+        .stat-panel {
+            background-color: #181b22;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.2rem;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .stat-panel:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .stat-panel h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-panel p {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* The custom panel box for your live feed post */
+        .post-panel {
             background-color: #14161d;
             border: 1px dashed var(--border-color);
-            padding: 1.2rem;
+            padding: 1.5rem;
             border-radius: 8px;
             color: #fff;
             font-style: italic;
             margin-top: 0.5rem;
-            line-height: 1.4;
+            line-height: 1.5;
+            text-align: center;
+            font-size: 1.05rem;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.4);
         }
     </style>
 </head>
@@ -41,56 +80,68 @@
             <a href="levels.html" class="nav-btn">Levels</a>
         </div>
 
-        <!-- Rebuilt to form your exact setup structure mapping -->
-        <div class="gd-stats-board" id="stats-board-container">
-            <div class="stat-card full-width" style="color: var(--text-muted); text-align: center;">
-                Syncing Geometry Dash account profile...
+        <!-- The core structural panels layout area -->
+        <div class="stats-panel-layout" id="stats-panel-container">
+            <div class="stat-panel" style="color: var(--text-muted);">
+                Fetching your live GD account details...
             </div>
         </div>
 
         <h3 style="margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Connect With Me</h3>
         <div class="socials-list" id="socials-container" style="margin-bottom: 2.5rem;"></div>
 
-        <h3 style="text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Recent post</h3>
-        <div id="profile-post-container" class="profile-post-box">Loading post...</div>
+        <h3 style="text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Most Recent Profile Post</h3>
+        <div id="profile-post-container" class="post-panel">Loading post...</div>
     </div>
 
     <script src="demonlist-data.js"></script>
     <script>
         window.onload = function() {
             initGlobalLayout();
-            const board = document.getElementById('stats-board-container');
+            const panelContainer = document.getElementById('stats-panel-container');
             const postBox = document.getElementById('profile-post-container');
             const scBox = document.getElementById('socials-container');
 
+            // Fetch live layout profile data values directly from the web client api endpoint
             fetch(`https://gdbrowser.com/api/profile/${DATA.gdUsername}`)
                 .then(res => res.json())
                 .then(player => {
                     if (!player || player.error) {
-                        board.innerHTML = `<div class="stat-card full-width" style="color: #ef4444;">Failed to parse profile data.</div>`;
+                        panelContainer.innerHTML = `<div class="stat-panel" style="color: #ef4444;">Failed to sync statistics panels.</div>`;
                         postBox.textContent = "Unavailable";
                         return;
                     }
 
-                    // 1. Render data into your specific structural block design layout
-                    board.innerHTML = `
-                        <div class="stat-card"><h4>Stars</h4><p>${player.stars || 0}</p></div>
-                        <div class="stat-card"><h4>Moons</h4><p>${player.moons || 0}</p></div>
-                        <div class="stat-card full-width"><h4>Demons</h4><p>${player.demons || 0}</p></div>
-                        <div class="stat-card full-width"><h4>Creator Points</h4><p>${player.cp || 0}</p></div>
-                        <div class="stat-card"><h4>Main Coins</h4><p>${player.coins || 0}</p></div>
-                        <div class="stat-card"><h4>User Coins</h4><p>${player.userCoins || 0}</p></div>
+                    // Render into your exact specified setup layout blocks
+                    panelContainer.innerHTML = `
+                        <!-- Row 1: Divided mini panels -->
+                        <div class="panel-row-split">
+                            <div class="stat-panel"><h4>Stars</h4><p>${player.stars || 0}</p></div>
+                            <div class="stat-panel"><h4>Moons</h4><p>${player.moons || 0}</p></div>
+                        </div>
+
+                        <!-- Row 2: Full wide single demon panel -->
+                        <div class="stat-panel"><h4>Demons</h4><p>${player.demons || 0}</p></div>
+
+                        <!-- Row 3: Full wide single creator point panel -->
+                        <div class="stat-panel"><h4>Creator Points</h4><p>${player.cp || 0}</p></div>
+
+                        <!-- Row 4: Divided coin mini panels -->
+                        <div class="panel-row-split">
+                            <div class="stat-panel"><h4>Main Coins</h4><p>${player.coins || 0}</p></div>
+                            <div class="stat-panel"><h4>User Coins</h4><p>${player.userCoins || 0}</p></div>
+                        </div>
                     `;
 
-                    // 2. Extract your latest live game feed profile status comment statement
-                    postBox.textContent = player.post ? `"${player.post}"` : "No recent profile posts found.";
+                    // Push the live server status quote directly into the comment panel
+                    postBox.textContent = player.post ? `"${player.post}"` : "No recent profile updates found.";
                 })
                 .catch(err => {
-                    board.innerHTML = `<div class="stat-card full-width" style="color: #ef4444;">Error reading server database API data.</div>`;
-                    postBox.textContent = "Error pulling feed updates.";
+                    panelContainer.innerHTML = `<div class="stat-panel" style="color: #ef4444;">Error connecting to server.</div>`;
+                    postBox.textContent = "Error updating database feed.";
                 });
 
-            // 3. Fallback check parser rendering for connection methods tags list loop 
+            // Parse optional fallback community connection rows below it
             scBox.innerHTML = '';
             const targetedSocials = DATA.socials ? DATA.socials : { "YouTube": "@HeraijsGD", "Discord": "heraijs_xyz" };
             Object.entries(targetedSocials).forEach(([p, u]) => {
