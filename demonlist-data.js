@@ -1,6 +1,6 @@
 const DATA = {
     profileName: "Creator+",
-    description: "Welcome to my personal hub. Tracking my Geometry Dash progression, hardest completions, and content creation milestones all in one place.",
+    description: "I have been playing this silly cube game for the past 4-5 years of my life. :3",
     
     goals: [
         { text: "Have 10 subscribers on YT", completed: false },
