@@ -3,9 +3,9 @@ const DATA = {
     description: "Welcome to my personal hub. Tracking my Geometry Dash progression, hardest completions, and content creation milestones all in one place.",
     
     goals: [
-        { text: "Complete my first Hard Demon", completed: false },
-        { text: "Reach 15 total Demon completions", completed: false },
-        { text: "Record completion proofs for future levels", completed: true }
+        { text: "Have 10 subscribers on YT", completed: false },
+        { text: "Beat Future funk", completed: false },
+        { text: "Get a Creator point", completed: false }
     ],
 
     demonlist: [
@@ -35,7 +35,7 @@ function initGlobalLayout() {
             const badgeText = goal.completed ? 'Done' : 'Grinding';
             goalsContainer.innerHTML += `
                 <div class="goal-item ${statusClass}">
-                    🎲 <span>${goal.text}</span>
+                    <span>${goal.text}</span>
                     <div class="status-badge">${badgeText}</div>
                 </div>`;
         });
