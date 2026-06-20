@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Levels</title>
+    <title>Creator+ - Levels</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Makes the entire row clearly indicate it's an openable link */
         .clickable-row { cursor: pointer; }
         .clickable-row:hover td { background-color: var(--row-hover) !important; }
     </style>
@@ -34,7 +33,7 @@
                 </tr>
             </thead>
             <tbody id="all-levels-body">
-                <tr><td colspan="4" style="text-align:center; color: var(--text-muted);">Scanning GD servers for published levels...</td></tr>
+                <tr><td colspan="4" style="text-align:center; color: var(--text-muted);">Getting em levelos...</td></tr>
             </tbody>
         </table>
     </div>
@@ -45,38 +44,48 @@
             initGlobalLayout();
             const tbody = document.getElementById('all-levels-body');
 
-            fetch(`https://gdbrowser.com/api/search/${DATA.gdUsername}?user`)
-                .then(res => res.json())
-                .then(levels => {
-                    if (!levels || !Array.isArray(levels) || levels.length === 0) {
-                        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:var(--text-muted);">No uploaded levels found for this account.</td></tr>`;
-                        return;
-                    }
+            // Fetch page 0 and page 1 to guarantee it grabs your complete upload history
+            Promise.all([
+                fetch(`https://gdbrowser.com/api/search/${DATA.gdUsername}?user&page=0`).then(res => res.json().catch(() => [])),
+                fetch(`https://gdbrowser.com/api/search/${DATA.gdUsername}?user&page=1`).then(res => res.json().catch(() => []))
+            ])
+            .then(([page0, page1]) => {
+                // Ensure variables are formatted cleanly as arrays and merge them
+                const list0 = Array.isArray(page0) ? page0 : [];
+                const list1 = Array.isArray(page1) ? page1 : [];
+                const allLevels = [...list0, ...list1];
 
-                    tbody.innerHTML = '';
-                    levels.forEach(lvl => {
-                        const starsText = lvl.stars > 0 ? ` (${lvl.stars}★)` : '';
-                        
-                        // Create row element manually to hook up cleanly with an open window tab command
-                        const tr = document.createElement('tr');
-                        tr.className = 'clickable-row';
-                        tr.title = "Click to view on GD Browser";
-                        tr.onclick = function() {
-                            window.open(`https://gdbrowser.com/${lvl.id}`, '_blank');
-                        };
+                // Filter out any potential error objects from the API response
+                const totalCleanLevels = allLevels.filter(lvl => lvl && lvl.id && !lvl.error);
 
-                        tr.innerHTML = `
-                            <td class="level-name">${lvl.name} <span style="font-size:0.8rem; color:var(--text-muted); display:block; margin-top:2px;">ID: ${lvl.id}</span></td>
-                            <td class="creator-name">${lvl.downloads.toLocaleString()}</td>
-                            <td class="creator-name" style="color: #4ade80;">${lvl.likes.toLocaleString()}</td>
-                            <td style="font-weight:600; color:#fff;">${lvl.difficulty}${starsText}</td>
-                        `;
-                        tbody.appendChild(tr);
-                    });
-                })
-                .catch(err => {
-                    tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#ef4444;">Error reading level database records.</td></tr>`;
+                if (totalCleanLevels.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:var(--text-muted);">No uploaded levels found for this account.</td></tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = '';
+                totalCleanLevels.forEach(lvl => {
+                    const starsText = lvl.stars > 0 ? ` (${lvl.stars}★)` : '';
+                    
+                    const tr = document.createElement('tr');
+                    tr.className = 'clickable-row';
+                    tr.title = "Click to view on GD Browser";
+                    tr.onclick = function() {
+                        window.open(`https://gdbrowser.com/${lvl.id}`, '_blank');
+                    };
+
+                    tr.innerHTML = `
+                        <td class="level-name">${lvl.name} <span style="font-size:0.8rem; color:var(--text-muted); display:block; margin-top:2px;">ID: ${lvl.id}</span></td>
+                        <td class="creator-name">${lvl.downloads.toLocaleString()}</td>
+                        <td class="creator-name" style="color: #4ade80;">${lvl.likes.toLocaleString()}</td>
+                        <td style="font-weight:600; color:#fff;">${lvl.difficulty}${starsText}</td>
+                    `;
+                    tbody.appendChild(tr);
                 });
+            })
+            .catch(err => {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#ef4444;">Error reading level database records.</td></tr>`;
+            });
         };
     </script>
 </body>
