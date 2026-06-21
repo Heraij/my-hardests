@@ -5,7 +5,7 @@ const DATA = {
     // Added this link parameter for the GD Browser API to fetch your data
     gdUsername: "CreatorPLUS100",
 
-    latestVideo: "https://www.youtube.com/watch?v=Fsy7RC4VagU",
+    latestVideo: "https://www.youtube.com/watch?v=nXQIFtTD6kM&t=6s",
     // YOUR TIME MACHINE LOG: Add entries here whenever you want to lock in a memory!
     
     goals: [
