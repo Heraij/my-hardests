@@ -15,7 +15,7 @@ const DATA = {
     ],
 
     demonlist: [
-        { "level": "Sakupen Egg", "creator": "Sivlol", "difficulty": "Medium Demon", "video": "https://www.youtube.com/watch?v=M61Vqi6ryj8" },
+        { "level": "Sakupen Egg", "creator": "Sivlol", "difficulty": "Medium Demon", "video": "https://www.youtube.com/watch?v=nXQIFtTD6kM" },
         { "level": "Reanimation", "creator": "Terron", "difficulty": "Medium Demon", "video": "https://www.youtube.com/watch?v=RB8g4CZLik4&list=RDRB8g4CZLik4&start_radio=1" },
         { "level": "Decode", "creator": "Rek3dge", "difficulty": "Easy Demon", "video": "https://www.youtube.com/watch?v=IRTQZZ502J0&list=RDIRTQZZ502J0&start_radio=1" },
         { "level": "Deadlocked", "creator": "RobTop", "difficulty": "Easy Demon", "video": "https://www.youtube.com/watch?v=I3LFTGTIWoI" },
