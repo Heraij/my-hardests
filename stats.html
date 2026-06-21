@@ -2,25 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Stats</title>
+    <title>My Statistics</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Panel layout alignment rules */
+        /* Time Machine Controls Style */
+        .time-machine-box {
+            background: linear-gradient(135deg, #1e1b4b, #111827);
+            border: 2px solid #6366f1;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+        }
+        .time-machine-box h3 {
+            color: #818cf8;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.8rem;
+        }
+        .timeline-slider {
+            width: 100%;
+            max-width: 400px;
+            accent-color: #6366f1;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .current-time-display {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 8px rgba(255,255,255,0.3);
+            margin-top: 5px;
+        }
+
+        /* Standard layout alignment rules */
         .stats-panel-layout, .socials-panel-layout {
             display: flex;
             flex-direction: column;
             gap: 15px;
             margin-bottom: 2.5rem;
         }
-
-        /* Two panels splitting a row evenly */
         .panel-row-split {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
         }
-
-        /* Individual little data and social panels */
         .stat-panel, .social-panel {
             background-color: #181b22;
             border: 1px solid var(--border-color);
@@ -28,14 +56,8 @@
             padding: 1.2rem;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s ease, border-color 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .stat-panel:hover, .social-panel:hover {
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
         .stat-panel h4, .social-panel h4 {
             font-size: 0.85rem;
             text-transform: uppercase;
@@ -43,20 +65,15 @@
             color: var(--text-muted);
             margin-bottom: 0.5rem;
         }
-
         .stat-panel p, .social-panel p {
             font-size: 1.6rem;
             font-weight: bold;
             color: #fff;
         }
-        
-        /* Subtle text style adjustment for social handles */
         .social-panel p {
             font-size: 1.3rem;
             color: var(--accent-color);
         }
-
-        /* The custom panel box for your live feed post */
         .post-panel {
             background-color: #14161d;
             border: 1px dashed var(--border-color);
@@ -86,73 +103,101 @@
             <a href="levels.html" class="nav-btn">Levels</a>
         </div>
 
-        <!-- The core structural stats layout area -->
-        <div class="stats-panel-layout" id="stats-panel-container">
-            <div class="stat-panel" style="color: var(--text-muted);">
-                Getting em numbies...
-            </div>
+        <!-- THE TIME MACHINE HUB INTERFACE -->
+        <div class="time-machine-box">
+            <h3>⏳ GD Progress Time Machine</h3>
+            <input type="range" id="time-slider" class="timeline-slider" min="0" max="0" value="0">
+            <div id="time-display" class="current-time-display">Loading Temporal Anchor...</div>
         </div>
 
-        <!-- Rebuilt Socials section into matching panels -->
-        <h3 style="margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Socials:</h3>
+        <!-- The core structural panels layout area -->
+        <div class="stats-panel-layout" id="stats-panel-container"></div>
+
+        <h3 style="margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Connect With Me</h3>
         <div class="socials-panel-layout" id="socials-panel-container"></div>
 
-        <h3 style="text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Recent Post:</h3>
-        <div id="profile-post-container" class="post-panel">Loading post...</div>
+        <h3 style="text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Profile Post At That Moment</h3>
+        <div id="profile-post-container" class="post-panel">Loading...</div>
     </div>
 
     <script src="demonlist-data.js"></script>
     <script>
+        let cachedLiveSnapshot = null; // Saves API response to avoid redundant fetches
+
         window.onload = function() {
             initGlobalLayout();
-            const panelContainer = document.getElementById('stats-panel-container');
-            const postBox = document.getElementById('profile-post-container');
-            const scBox = document.getElementById('socials-panel-container');
-
-            // 1. Fetch live data values from the GD Browser API
-            fetch(`https://gdbrowser.com/api/profile/${DATA.gdUsername}`)
-                .then(res => res.json())
-                .then(player => {
-                    if (!player || player.error) {
-                        panelContainer.innerHTML = `<div class="stat-panel" style="color: #ef4444;">Failed to sync statistics panels.</div>`;
-                        postBox.textContent = "Unavailable";
-                        return;
-                    }
-
-                    // Render game statistics panels
-                    panelContainer.innerHTML = `
-                        <div class="panel-row-split">
-                            <div class="stat-panel"><h4>Stars</h4><p>${player.stars || 0}</p></div>
-                            <div class="stat-panel"><h4>Moons</h4><p>${player.moons || 0}</p></div>
-                        </div>
-                        <div class="stat-panel"><h4>Demons</h4><p>${player.demons || 0}</p></div>
-                        <div class="stat-panel"><h4>Creator Points</h4><p>${player.cp || 0}</p></div>
-                        <div class="panel-row-split">
-                            <div class="stat-panel"><h4>Main Coins</h4><p>${player.coins || 0}</p></div>
-                            <div class="stat-panel"><h4>User Coins</h4><p>${player.userCoins || 0}</p></div>
-                        </div>
-                    `;
-
-                    // Render live game comment string
-                    postBox.textContent = player.post ? `"${player.post}"` : "No recent profile updates found.";
-                })
-                .catch(err => {
-                    panelContainer.innerHTML = `<div class="stat-panel" style="color: #ef4444;">Error connecting to server.</div>`;
-                    postBox.textContent = "Error updating database feed.";
-                });
-
-            // 2. Parse custom platforms array into cleanly split row side panels
-            scBox.innerHTML = '';
-            const targetedSocials = DATA.socials ? DATA.socials : { "YouTube": "@CreatorPlusGD", "Discord": "@Heraij" };
             
-            // This groups your social entries side-by-side into pairs beautifully
+            const history = DATA.statsHistory || [{ date: "Live Profile Only", isLive: true }];
+            const slider = document.getElementById('time-slider');
+            const timeDisplay = document.getElementById('time-display');
+
+            // Configure slider spectrum parameters based on array dimensions
+            slider.max = history.length - 1;
+            slider.value = 0; // Initialize at index 0 (the top latest item)
+
+            // UI updating function wrapper
+            function renderTimeEra(index) {
+                const snapshot = history[index];
+                timeDisplay.textContent = snapshot.date;
+
+                if (snapshot.isLive) {
+                    if (cachedLiveSnapshot) {
+                        applyStatsToPanels(cachedLiveSnapshot);
+                    } else {
+                        document.getElementById('stats-panel-container').innerHTML = `<div class="stat-panel" style="color:var(--text-muted);">Opening portal to live GD servers...</div>`;
+                        fetch(`https://gdbrowser.com/api/profile/${DATA.gdUsername}`)
+                            .then(res => res.json())
+                            .then(player => {
+                                if (!player || player.error) throw new Error();
+                                cachedLiveSnapshot = {
+                                    stars: player.stars || 0,
+                                    moons: player.moons || 0,
+                                    demons: player.demons || 0,
+                                    cp: player.cp || 0,
+                                    coins: player.coins || 0,
+                                    userCoins: player.userCoins || 0,
+                                    post: player.post ? `"${player.post}"` : "No recent profile updates found."
+                                };
+                                applyStatsToPanels(cachedLiveSnapshot);
+                            })
+                            .catch(() => {
+                                document.getElementById('stats-panel-container').innerHTML = `<div class="stat-panel" style="color:#ef4444;">API Sync Error. Slide to older dates to read data cache logs!</div>`;
+                            });
+                    }
+                } else {
+                    // Instantly render recorded historical numbers
+                    applyStatsToPanels(snapshot);
+                }
+            }
+
+            function applyStatsToPanels(data) {
+                document.getElementById('stats-panel-container').innerHTML = `
+                    <div class="panel-row-split">
+                        <div class="stat-panel"><h4>Stars</h4><p>${data.stars}</p></div>
+                        <div class="stat-panel"><h4>Moons</h4><p>${data.moons}</p></div>
+                    </div>
+                    <div class="stat-panel"><h4>Demons</h4><p>${data.demons}</p></div>
+                    <div class="stat-panel"><h4>Creator Points</h4><p>${data.cp}</p></div>
+                    <div class="panel-row-split">
+                        <div class="stat-panel"><h4>Main Coins</h4><p>${data.coins}</p></div>
+                        <div class="stat-panel"><h4>User Coins</h4><p>${data.userCoins}</p></div>
+                    </div>
+                `;
+                document.getElementById('profile-post-container').textContent = data.post || "No record of status message.";
+            }
+
+            // Hook up listeners to respond immediately when user drags the timeline handle
+            slider.oninput = function() { renderTimeEra(this.value); };
+            
+            // Fire up initial view load
+            renderTimeEra(0);
+
+            // Populate Social links
+            const scBox = document.getElementById('socials-panel-container');
+            const targetedSocials = DATA.socials ? DATA.socials : { "YouTube": "@Heraijs", "Discord": "xyz" };
             let socialHtml = '<div class="panel-row-split">';
             Object.entries(targetedSocials).forEach(([platform, handle]) => {
-                socialHtml += `
-                    <div class="social-panel">
-                        <h4>${platform.toUpperCase()}</h4>
-                        <p>${handle}</p>
-                    </div>`;
+                socialHtml += `<div class="social-panel"><h4>${platform.toUpperCase()}</h4><p>${handle}</p></div>`;
             });
             socialHtml += '</div>';
             scBox.innerHTML = socialHtml;
