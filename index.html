@@ -53,14 +53,14 @@
 
         <!-- Big Video Embed Section -->
         <div class="featured-video-section">
-            <h3 style="margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Newest vid</h3>
+            <h3 style="margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Featured Vid</h3>
             <div class="video-wrapper" id="featured-video-container">
                 <div class="video-error">Loading vid...</div>
             </div>
         </div>
 
         <div class="goals-section">
-            <h3>Life goals:</h3>
+            <h3>GD goals</h3>
             <div id="goals-container"></div>
         </div>
     </div>
@@ -82,7 +82,7 @@
                 videoContainer.innerHTML = `
                     <iframe 
                         src="https://www.youtube.com/embed/${videoId}" 
-                        title="Newest vid" 
+                        title="Featured Vid" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                         allowfullscreen>
                     </iframe>`;
