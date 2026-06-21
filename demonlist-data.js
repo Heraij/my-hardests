@@ -6,6 +6,23 @@ const DATA = {
     gdUsername: "CreatorPLUS100",
 
     latestVideo: "https://www.youtube.com/watch?v=Fsy7RC4VagU",
+    // YOUR TIME MACHINE LOG: Add entries here whenever you want to lock in a memory!
+    statsHistory: [
+        {
+            date: "Live (Current)",
+            isLive: true // This tells the script to fetch the actual live server API data
+        },
+        {
+            date: "Jan 2026 - The Grind Begins",
+            stars: 120, moons: 15, demons: 1, cp: 0, coins: 5, userCoins: 12,
+            post: "Just beat my first demon layout!! Let's go!"
+        },
+        {
+            date: "June 2025 - Legacy Era",
+            stars: 45, moons: 0, demons: 0, cp: 0, coins: 2, userCoins: 3,
+            post: "Workin' on a secret project level."
+        }
+    ],
     
     goals: [
         { text: "Have 10 subscribers on YT", completed: false },
