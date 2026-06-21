@@ -37,7 +37,7 @@
             margin-top: 5px;
         }
 
-        /* Standard layout alignment rules */
+        /* Panel Grid Rules */
         .stats-panel-layout, .socials-panel-layout {
             display: flex;
             flex-direction: column;
@@ -56,7 +56,6 @@
             padding: 1.2rem;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .stat-panel h4, .social-panel h4 {
             font-size: 0.85rem;
@@ -85,7 +84,6 @@
             line-height: 1.5;
             text-align: center;
             font-size: 1.05rem;
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.4);
         }
     </style>
 </head>
@@ -103,96 +101,120 @@
             <a href="levels.html" class="nav-btn">Levels</a>
         </div>
 
-        <!-- THE TIME MACHINE HUB INTERFACE -->
+        <!-- TIME MACHINE HUB INTERFACE -->
         <div class="time-machine-box">
             <h3>⏳ GD Progress Time Machine</h3>
             <input type="range" id="time-slider" class="timeline-slider" min="0" max="0" value="0">
-            <div id="time-display" class="current-time-display">Loading Temporal Anchor...</div>
+            <div id="time-display" class="current-time-display">Connecting Temporal Anchor...</div>
         </div>
 
         <!-- The core structural panels layout area -->
-        <div class="stats-panel-layout" id="stats-panel-container"></div>
+        <div class="stats-panel-layout" id="stats-panel-container">
+            <div class="stat-panel" style="color:var(--text-muted);">Syncing database timelines...</div>
+        </div>
 
         <h3 style="margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Connect With Me</h3>
         <div class="socials-panel-layout" id="socials-panel-container"></div>
 
         <h3 style="text-transform: uppercase; letter-spacing: 1px; font-size: 1.3rem;">Profile Post At That Moment</h3>
-        <div id="profile-post-container" class="post-panel">Loading...</div>
+        <div id="profile-post-container" class="post-panel">---</div>
     </div>
 
     <script src="demonlist-data.js"></script>
     <script>
-        let cachedLiveSnapshot = null; // Saves API response to avoid redundant fetches
-
         window.onload = function() {
             initGlobalLayout();
             
-            const history = DATA.statsHistory || [{ date: "Live Profile Only", isLive: true }];
-            const slider = document.getElementById('time-slider');
-            const timeDisplay = document.getElementById('time-display');
+            // 1. Fetch live profile stats first
+            fetch(`https://gdbrowser.com/api/profile/${DATA.gdUsername}`)
+                .then(res => res.json())
+                .then(player => {
+                    if (!player || player.error) throw new Error("API issues");
 
-            // Configure slider spectrum parameters based on array dimensions
-            slider.max = history.length - 1;
-            slider.value = 0; // Initialize at index 0 (the top latest item)
+                    const todayStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                    
+                    const currentStats = {
+                        date: `${todayStr} (Today - Live)`,
+                        stars: player.stars || 0,
+                        moons: player.moons || 0,
+                        demons: player.demons || 0,
+                        cp: player.cp || 0,
+                        coins: player.coins || 0,
+                        userCoins: player.userCoins || 0,
+                        post: player.post ? `"${player.post}"` : "No profile post found."
+                    };
 
-            // UI updating function wrapper
-            function renderTimeEra(index) {
-                const snapshot = history[index];
-                timeDisplay.textContent = snapshot.date;
+                    // 2. Load historical array from local storage, or start blank if it's the first time
+                    let localHistory = JSON.parse(localStorage.getItem('gd_stats_history')) || [];
 
-                if (snapshot.isLive) {
-                    if (cachedLiveSnapshot) {
-                        applyStatsToPanels(cachedLiveSnapshot);
-                    } else {
-                        document.getElementById('stats-panel-container').innerHTML = `<div class="stat-panel" style="color:var(--text-muted);">Opening portal to live GD servers...</div>`;
-                        fetch(`https://gdbrowser.com/api/profile/${DATA.gdUsername}`)
-                            .then(res => res.json())
-                            .then(player => {
-                                if (!player || player.error) throw new Error();
-                                cachedLiveSnapshot = {
-                                    stars: player.stars || 0,
-                                    moons: player.moons || 0,
-                                    demons: player.demons || 0,
-                                    cp: player.cp || 0,
-                                    coins: player.coins || 0,
-                                    userCoins: player.userCoins || 0,
-                                    post: player.post ? `"${player.post}"` : "No recent profile updates found."
-                                };
-                                applyStatsToPanels(cachedLiveSnapshot);
-                            })
-                            .catch(() => {
-                                document.getElementById('stats-panel-container').innerHTML = `<div class="stat-panel" style="color:#ef4444;">API Sync Error. Slide to older dates to read data cache logs!</div>`;
-                            });
+                    // 3. Daily Checker: Look to see if we already recorded today's entry
+                    const todayStripped = todayStr + " (Today - Live)";
+                    // Filter out any stale "Today" entry so it replaces it with fresh numbers
+                    localHistory = localHistory.filter(item => !item.date.includes("(Today - Live)"));
+                    
+                    // Add the fresh snapshot at the beginning of our chronological timeline
+                    localHistory.unshift(currentStats);
+
+                    // If you want to log permanent past days, it checks if a non-live version of today exists
+                    const staticDateLabel = todayStr;
+                    const dayAlreadyLogged = localHistory.some(item => item.date === staticDateLabel);
+                    
+                    if (!dayAlreadyLogged) {
+                        // Duplicate current snapshot but label it permanently as a historical day!
+                        const archiveDay = { ...currentStats, date: staticDateLabel };
+                        // Push it right under the live entry
+                        localHistory.splice(1, 0, archiveDay);
                     }
-                } else {
-                    // Instantly render recorded historical numbers
-                    applyStatsToPanels(snapshot);
+
+                    // Save the updated list back to the browser's hard drive
+                    localStorage.setItem('gd_stats_history', JSON.stringify(localHistory));
+
+                    // 4. Fire up the slider logic
+                    setupTimelineSlider(localHistory);
+                })
+                .catch(err => {
+                    console.error(err);
+                    // Fallback to offline stored data if game servers are acting up
+                    const localHistory = JSON.parse(localStorage.getItem('gd_stats_history')) || [];
+                    if (localHistory.length > 0) {
+                        setupTimelineSlider(localHistory);
+                    } else {
+                        document.getElementById('stats-panel-container').innerHTML = 
+                            `<div class="stat-panel" style="color:#ef4444;">Could not fetch live profile and no historical database exists yet! Check back tomorrow.</div>`;
+                    }
+                });
+
+            function setupTimelineSlider(historyArray) {
+                const slider = document.getElementById('time-slider');
+                const timeDisplay = document.getElementById('time-display');
+
+                slider.max = historyArray.length - 1;
+                slider.value = 0; // Lock handle to position 0 (The Live view)
+
+                function updateView(index) {
+                    const data = historyArray[index];
+                    timeDisplay.textContent = data.date;
+
+                    document.getElementById('stats-panel-container').innerHTML = `
+                        <div class="panel-row-split">
+                            <div class="stat-panel"><h4>Stars</h4><p>${data.stars.toLocaleString()}</p></div>
+                            <div class="stat-panel"><h4>Moons</h4><p>${data.moons.toLocaleString()}</p></div>
+                        </div>
+                        <div class="stat-panel"><h4>Demons</h4><p>${data.demons.toLocaleString()}</p></div>
+                        <div class="stat-panel"><h4>Creator Points</h4><p>${data.cp.toLocaleString()}</p></div>
+                        <div class="panel-row-split">
+                            <div class="stat-panel"><h4>Main Coins</h4><p>${data.coins.toLocaleString()}</p></div>
+                            <div class="stat-panel"><h4>User Coins</h4><p>${data.userCoins.toLocaleString()}</p></div>
+                        </div>
+                    `;
+                    document.getElementById('profile-post-container').textContent = data.post;
                 }
+
+                slider.oninput = function() { updateView(this.value); };
+                updateView(0); // Initialize first view
             }
 
-            function applyStatsToPanels(data) {
-                document.getElementById('stats-panel-container').innerHTML = `
-                    <div class="panel-row-split">
-                        <div class="stat-panel"><h4>Stars</h4><p>${data.stars}</p></div>
-                        <div class="stat-panel"><h4>Moons</h4><p>${data.moons}</p></div>
-                    </div>
-                    <div class="stat-panel"><h4>Demons</h4><p>${data.demons}</p></div>
-                    <div class="stat-panel"><h4>Creator Points</h4><p>${data.cp}</p></div>
-                    <div class="panel-row-split">
-                        <div class="stat-panel"><h4>Main Coins</h4><p>${data.coins}</p></div>
-                        <div class="stat-panel"><h4>User Coins</h4><p>${data.userCoins}</p></div>
-                    </div>
-                `;
-                document.getElementById('profile-post-container').textContent = data.post || "No record of status message.";
-            }
-
-            // Hook up listeners to respond immediately when user drags the timeline handle
-            slider.oninput = function() { renderTimeEra(this.value); };
-            
-            // Fire up initial view load
-            renderTimeEra(0);
-
-            // Populate Social links
+            // Simple static social box generator
             const scBox = document.getElementById('socials-panel-container');
             const targetedSocials = DATA.socials ? DATA.socials : { "YouTube": "@Heraijs", "Discord": "xyz" };
             let socialHtml = '<div class="panel-row-split">';
