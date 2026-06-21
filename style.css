@@ -1,3 +1,24 @@
+/* Floating Visitor Counter Badge */
+.visitor-counter-badge {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    background-color: #181b22;
+    border: 1px solid var(--border-color);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    letter-spacing: 0.5px;
+    pointer-events: none; /* Keeps it non-intrusive */
+}
+.visitor-counter-badge span {
+    color: var(--accent-color);
+    font-weight: bold;
+    margin-left: 4px;
+}
 :root {
     --bg-color: #0a0b0d;
     --container-bg: #111317;
