@@ -53,3 +53,45 @@ function getYouTubeId(url) {
     const match = url.match(regExp);
     return (match && match[2].length === 11) ? match[2] : null;
 }
+// Layout setup handler
+function initGlobalLayout() {
+    document.getElementById('user-name').textContent = DATA.profileName;
+    document.getElementById('user-desc').textContent = DATA.description;
+    
+    const goalsContainer = document.getElementById('goals-container');
+    if(goalsContainer) {
+        goalsContainer.innerHTML = '';
+        DATA.goals.forEach(goal => {
+            const statusClass = goal.completed ? 'completed' : 'in-progress';
+            const badgeText = goal.completed ? 'Done' : 'Grinding';
+            goalsContainer.innerHTML += `
+                <div class="goal-item ${statusClass}">
+                    <span>${goal.text}</span>
+                    <div class="status-badge">${badgeText}</div>
+                </div>`;
+        });
+    }
+
+    // Dynamic View Counter Integration
+    const counterDiv = document.createElement('div');
+    counterDiv.className = 'visitor-counter-badge';
+    counterDiv.innerHTML = `Views: <span id="visit-count">...</span>`;
+    document.body.appendChild(counterDiv);
+
+    // Creates a unique registry namespace for your site based on your chosen user profile name
+    const siteKey = encodeURIComponent(DATA.profileName.replace(/\s+/g, '-').toLowerCase());
+    
+    fetch(`https://api.countapi.xyz/hit/creator-plus-hub/${siteKey}`)
+        .then(res => res.json())
+        .then(data => {
+            const countEl = document.getElementById('visit-count');
+            if(countEl && data.value) {
+                countEl.textContent = data.value.toLocaleString();
+            }
+        })
+        .catch(() => {
+            // Invisible fail-safe fallback if the external service is overloaded
+            const countEl = document.getElementById('visit-count');
+            if(countEl) countEl.textContent = "Active";
+        });
+}
