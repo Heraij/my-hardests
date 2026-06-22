@@ -15,9 +15,37 @@ const DATA = {
     ],
 
     demonlist: [
-        { "level": "Sakupen Egg", "creator": "Sivlol", "difficulty": "Medium Demon", "video": "https://www.youtube.com/watch?v=nXQIFtTD6kM" },
-        { "level": "Reanimation", "creator": "Terron", "difficulty": "Medium Demon", "video": "https://www.youtube.com/watch?v=RB8g4CZLik4&list=RDRB8g4CZLik4&start_radio=1" },
-        { "level": "Decode", "creator": "Rek3dge", "difficulty": "Easy Demon", "video": "https://youtu.be/-Na7CLoDT9o" },
+       demonlist: [
+        { 
+            "level": "Sakupen Egg", 
+            "creator": "Sivlol", 
+            "difficulty": "Medium Demon", 
+            "video": "https://www.youtube.com/watch?v=M61Vqi6ryj8",
+            "enjoyment": "9/10",
+            "attempts": 842,
+            "dateAdded": "Feb 14, 2026",
+            "thoughts": "Incredibly fun level! The gameplay flows perfectly once you learn the transitions. The wave sections can get a bit sync-dependent, but overall a phenomenal Medium Demon."
+        },
+        { 
+            "level": "Reanimation", 
+            "creator": "Terron", 
+            "difficulty": "Medium Demon", 
+            "video": "https://www.youtube.com/watch?v=RB8g4CZLik4",
+            "enjoyment": "8/10",
+            "attempts": 1205,
+            "dateAdded": "Jan 28, 2026",
+            "thoughts": "An absolute classic bossfight level. The visual effects still hold up perfectly today. Getting consistent at the drop took some time, but it felt amazing to finally pull off."
+        },
+        { 
+            "level": "Decode", 
+            "creator": "Rek3dge", 
+            "difficulty": "Easy Demon", 
+            "video": "https://www.youtube.com/watch?v=IRTQZZ502J0",
+            "enjoyment": "10/10",
+            "attempts": 450,
+            "dateAdded": "Dec 15, 2025",
+            "thoughts": "Does this look decode-able to you? The famous last UFO section is still nerve-wracking, but it's an absolute must-play milestone for any aspiring player."
+        }
         { "level": "Deadlocked", "creator": "RobTop", "difficulty": "Easy Demon", "video": "https://www.youtube.com/watch?v=I3LFTGTIWoI" },
         { "level": "X", "creator": "Triaxis", "difficulty": "Easy Demon", "video": "https://www.youtube.com/watch?v=t_2qpQGNS3A" },
         { "level": "Platinum Adventure", "creator": "Jerry4", "difficulty": "Easy Demon", "video": "https://www.youtube.com/watch?v=DWGGjNnU4CA" },  
