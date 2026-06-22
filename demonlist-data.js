@@ -28,7 +28,7 @@ const DATA = {
             "level": "Reanimation", 
             "creator": "Terron", 
             "difficulty": "Medium Demon", 
-            "video": "https://www.youtube.com/watch?v=RB8g4CZLik4",
+            "video": "https://youtu.be/QfCG_o9-LPE",
             "enjoyment": "10/10",
             "attempts": 119,
             "dateAdded": "June 22, 2026",
