@@ -4,6 +4,138 @@
     <meta charset="UTF-8">
     <title>My Hardests List</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Make table rows visually look clickable */
+        tbody tr {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        tbody tr:hover td {
+            background-color: var(--row-hover) !important;
+        }
+
+        /* ------------------------------------------
+           SLEEK LEVEL INFO MODAL POP-UP STYLES
+        ------------------------------------------ */
+        .level-modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #181b22;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: modalSlideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes modalSlideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-modal-btn:hover {
+            color: #ef4444;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.2rem;
+        }
+
+        .modal-author {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.8rem;
+        }
+
+        /* Stats Grid Layout inside the pop-up subpage */
+        .modal-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-pill {
+            background: #11141a;
+            border: 1px solid #242936;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .info-pill span {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .info-pill strong {
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .level-description-box {
+            background: #11141a;
+            border: 1px dashed var(--border-color);
+            padding: 12px;
+            border-radius: 6px;
+            font-style: italic;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .modal-action-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: var(--accent-color);
+            color: #fff;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .modal-action-btn:hover {
+            background-color: #4338ca; /* Darker accent overlay */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -32,29 +164,124 @@
         <div class="disclaimer-note">I don't have completion videos for these so just Trust me bro.</div>
     </div>
 
+    <div id="level-info-modal" class="level-modal">
+        <div class="modal-content">
+            <span class="close-modal-btn" id="close-modal">&times;</span>
+            <div id="modal-body-content">
+                </div>
+        </div>
+    </div>
+
     <script src="demonlist-data.js"></script>
     <script>
         window.onload = function() {
             initGlobalLayout();
             const tbody = document.getElementById('demonlist-body');
+            const modal = document.getElementById('level-info-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            const modalBody = document.getElementById('modal-body-content');
+
+            // 1. Build and render your main hardests list table row elements
             DATA.demonlist.forEach((item, index) => {
                 const tr = document.createElement('tr');
+                
                 let diffHtml = '';
                 if (item.difficulty) {
                     const clean = item.difficulty.toLowerCase().trim();
                     let gClass = clean === 'easy demon' ? 'easy-demon' : clean === 'medium demon' ? 'medium-demon' : '';
                     diffHtml = ` • <span class="diff-tag ${gClass}">${item.difficulty}</span>`;
                 }
+                
                 const vId = getYouTubeId(item.video);
                 const thumb = vId ? `<img src="https://img.youtube.com/vi/${vId}/mqdefault.jpg" class="yt-thumb">` : '';
-                const btn = item.video ? `<a href="${item.video}" target="_blank" class="video-link">Watch</a>` : `<span class="no-link">—</span>`;
+                const btn = item.video ? `<a href="${item.video}" target="_blank" class="video-link" onclick="event.stopPropagation();">Watch</a>` : `<span class="no-link">—</span>`;
 
                 tr.innerHTML = `
                     <td class="rank-col">#${index + 1}</td>
                     <td><div class="level-name">${item.level}</div><div class="creator-name">by ${item.creator}${diffHtml}</div></td>
                     <td><div class="showcase-cell">${thumb}${btn}</div></td>`;
+                
+                // 2. Click Event Listener: Triggers when clicking anywhere on the table row!
+                tr.onclick = function() {
+                    openLevelSubpage(item.level, item.creator, item.video);
+                };
+
                 tbody.appendChild(tr);
             });
+
+            // 3. Dynamic Subpage Pop-Up Generation Core Logic
+            function openLevelSubpage(levelName, creatorName, videoUrl) {
+                // Initialize pop-up instantly with a sleek loading animation state
+                modal.style.display = "flex";
+                modalBody.innerHTML = `
+                    <div class="modal-title">${levelName}</div>
+                    <div class="modal-author">by ${creatorName}</div>
+                    <div style="text-align: center; color: var(--text-muted); padding: 2rem 0;">
+                        Gathering records from GD servers...
+                    </div>`;
+
+                // Query the GD Browser level analytics search endpoint
+                fetch(`https://gdbrowser.com/api/search/${encodeURIComponent(levelName)}`)
+                    .then(res => res.json())
+                    .then(results => {
+                        // Locate the specific item corresponding to the exact author target parameters
+                        let targetLevel = Array.isArray(results) ? results.find(l => l.author.toLowerCase() === creatorName.toLowerCase()) : null;
+                        
+                        // Fallback: If exact match isn't found, just grab the first matching result name
+                        if (!targetLevel && Array.isArray(results) && results.length > 0) {
+                            targetLevel = results[0];
+                        }
+
+                        if (!targetLevel || targetLevel.error) {
+                            modalBody.innerHTML = `
+                                <div class="modal-title">${levelName}</div>
+                                <div class="modal-author">by ${creatorName}</div>
+                                <div style="text-align:center; color:#ef4444; padding: 1rem 0;">Could not match this level to online database items.</div>
+                                ${videoUrl ? `<a href="${videoUrl}" target="_blank" class="modal-action-btn">Watch Video Showcase</a>` : ''}
+                            `;
+                            return;
+                        }
+
+                        // Map out parsed data outputs variables safely
+                        const id = targetLevel.id || "Unknown";
+                        const downloads = targetLevel.downloads ? targetLevel.downloads.toLocaleString() : "0";
+                        const likes = targetLevel.likes ? targetLevel.likes.toLocaleString() : "0";
+                        const objects = targetLevel.objects ? targetLevel.objects.toLocaleString() : "N/A";
+                        const length = targetLevel.length || "Medium";
+                        const description = targetLevel.description ? `"${targetLevel.description}"` : "No level description provided.";
+
+                        // Replace container elements with our beautifully configured layout block modules
+                        modalBody.innerHTML = `
+                            <div class="modal-title">${targetLevel.name}</div>
+                            <div class="modal-author">by ${targetLevel.author} • ID: ${id}</div>
+                            
+                            <div class="level-description-box">${description}</div>
+
+                            <div class="modal-info-grid">
+                                <div class="info-pill"><span>Downloads</span><strong>📥 ${downloads}</strong></div>
+                                <div class="info-pill"><span>Likes</span><strong>👍 ${likes}</strong></div>
+                                <div class="info-pill"><span>Objects Count</span><strong>🧱 ${objects}</strong></div>
+                                <div class="info-pill"><span>Length</span><strong>⏱️ ${length}</strong></div>
+                            </div>
+
+                            <a href="https://gdbrowser.com/${id}" target="_blank" class="modal-action-btn" style="background:#22c55e; margin-bottom:10px;">Open on GD Browser</a>
+                            ${videoUrl ? `<a href="${videoUrl}" target="_blank" class="modal-action-btn">Watch My Completion Video</a>` : ''}
+                        `;
+                    })
+                    .catch(() => {
+                        modalBody.innerHTML = `
+                            <div class="modal-title">${levelName}</div>
+                            <div class="modal-author">by ${creatorName}</div>
+                            <div style="text-align:center; color:#ef4444; padding:1rem 0;">Network timeout. Check your connection.</div>
+                        `;
+                    });
+            }
+
+            // Close modal functions mapping
+            closeModalBtn.onclick = function() { modal.style.display = "none"; };
+            window.onclick = function(event) {
+                if (event.target == modal) { modal.style.display = "none"; }
+            };
         };
     </script>
 </body>
