@@ -6,7 +6,6 @@ const DATA = {
     gdUsername: "CreatorPLUS100",
 
     latestVideo: "https://www.youtube.com/watch?v=nXQIFtTD6kM&t=6s",
-    // YOUR TIME MACHINE LOG: Add entries here whenever you want to lock in a memory!
     
     goals: [
         { text: "Have 10 subscribers on YT", completed: false },
@@ -15,7 +14,6 @@ const DATA = {
     ],
 
     demonlist: [
-       demonlist: [
         { 
             "level": "Sakupen Egg", 
             "creator": "Sivlol", 
@@ -86,7 +84,7 @@ const DATA = {
             "dateAdded": "January 1, 0000",
             "thoughts": "Still haven't rebeat this one, going to do it in a bit."
         },
-         { 
+        { 
             "level": "Speed Racer", 
             "creator": "ZenthicAlpha", 
             "difficulty": "Easy Demon", 
@@ -96,7 +94,7 @@ const DATA = {
             "dateAdded": "January 1, 0000",
             "thoughts": "Still haven't rebeat this one, going to do it in a bit."
         },
-         { 
+        { 
             "level": "THE LIGHTNING ROAD", 
             "creator": "timeless real", 
             "difficulty": "Easy Demon", 
@@ -115,37 +113,11 @@ const DATA = {
             "attempts": 0,
             "dateAdded": "January 1, 0000",
             "thoughts": "Still haven't rebeat this one, going to do it in a bit."
-        },
+        }
     ]
 };
 
-// Layout setup handler
-function initGlobalLayout() {
-    document.getElementById('user-name').textContent = DATA.profileName;
-    document.getElementById('user-desc').textContent = DATA.description;
-    
-    const goalsContainer = document.getElementById('goals-container');
-    if(goalsContainer) {
-        goalsContainer.innerHTML = '';
-        DATA.goals.forEach(goal => {
-            const statusClass = goal.completed ? 'completed' : 'in-progress';
-            const badgeText = goal.completed ? 'Done' : 'Grinding';
-            goalsContainer.innerHTML += `
-                <div class="goal-item ${statusClass}">
-                    <span>${goal.text}</span>
-                    <div class="status-badge">${badgeText}</div>
-                </div>`;
-        });
-    }
-}
-
-function getYouTubeId(url) {
-    if (!url) return null;
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    const match = url.match(regExp);
-    return (match && match[2].length === 11) ? match[2] : null;
-}
-// Layout setup handler
+// Layout setup handler (Cleaned & Combined)
 function initGlobalLayout() {
     document.getElementById('user-name').textContent = DATA.profileName;
     document.getElementById('user-desc').textContent = DATA.description;
@@ -170,7 +142,6 @@ function initGlobalLayout() {
     counterDiv.innerHTML = `Views: <span id="visit-count">...</span>`;
     document.body.appendChild(counterDiv);
 
-    // Creates a unique registry namespace for your site based on your chosen user profile name
     const siteKey = encodeURIComponent(DATA.profileName.replace(/\s+/g, '-').toLowerCase());
     
     fetch(`https://api.countapi.xyz/hit/creator-plus-hub/${siteKey}`)
@@ -182,8 +153,14 @@ function initGlobalLayout() {
             }
         })
         .catch(() => {
-            // Invisible fail-safe fallback if the external service is overloaded
             const countEl = document.getElementById('visit-count');
             if(countEl) countEl.textContent = "Active";
         });
+}
+
+function getYouTubeId(url) {
+    if (!url) return null;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
 }
