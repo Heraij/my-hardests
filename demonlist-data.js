@@ -20,39 +20,111 @@ const DATA = {
             "level": "Sakupen Egg", 
             "creator": "Sivlol", 
             "difficulty": "Medium Demon", 
-            "video": "https://www.youtube.com/watch?v=M61Vqi6ryj8",
+            "video": "https://www.youtube.com/watch?v=nXQIFtTD6kM",
             "enjoyment": "9/10",
-            "attempts": 842,
-            "dateAdded": "Feb 14, 2026",
-            "thoughts": "Incredibly fun level! The gameplay flows perfectly once you learn the transitions. The wave sections can get a bit sync-dependent, but overall a phenomenal Medium Demon."
+            "attempts": 650,
+            "dateAdded": "June 21, 2026",
+            "thoughts": "Actually felt alot easier then Reanimation, but still decided to put it here cause it took more attempts. Beat sub 1h!"
         },
         { 
             "level": "Reanimation", 
             "creator": "Terron", 
             "difficulty": "Medium Demon", 
             "video": "https://www.youtube.com/watch?v=RB8g4CZLik4",
-            "enjoyment": "8/10",
-            "attempts": 1205,
-            "dateAdded": "Jan 28, 2026",
-            "thoughts": "An absolute classic bossfight level. The visual effects still hold up perfectly today. Getting consistent at the drop took some time, but it felt amazing to finally pull off."
+            "enjoyment": "10/10",
+            "attempts": 119,
+            "dateAdded": "June 22, 2026",
+            "thoughts": "Im very pleased I didn't die to the ending, still took a bit to rebeat. Original attempts lost, but about 300-400ish"
         },
         { 
             "level": "Decode", 
             "creator": "Rek3dge", 
             "difficulty": "Easy Demon", 
+            "video": "https://www.youtube.com/watch?v=-Na7CLoDT9o",
+            "enjoyment": "7/10",
+            "attempts": 1425,
+            "dateAdded": "June 21, 2026",
+            "thoughts": "Absolutely not my cup of tea, fun level - 90+% x3 is painful though."
+        },
+        { 
+            "level": "Deadlocked", 
+            "creator": "Robtop", 
+            "difficulty": "Easy Demon", 
             "video": "https://www.youtube.com/watch?v=IRTQZZ502J0",
-            "enjoyment": "10/10",
-            "attempts": 450,
-            "dateAdded": "Dec 15, 2025",
-            "thoughts": "Does this look decode-able to you? The famous last UFO section is still nerve-wracking, but it's an absolute must-play milestone for any aspiring player."
-        }
-        { "level": "Deadlocked", "creator": "RobTop", "difficulty": "Easy Demon", "video": "https://www.youtube.com/watch?v=I3LFTGTIWoI" },
-        { "level": "X", "creator": "Triaxis", "difficulty": "Easy Demon", "video": "https://www.youtube.com/watch?v=t_2qpQGNS3A" },
-        { "level": "Platinum Adventure", "creator": "Jerry4", "difficulty": "Easy Demon", "video": "https://www.youtube.com/watch?v=DWGGjNnU4CA" },  
-        { "level": "Clubstep", "creator": "Robtop", "difficulty": "Easy Demon", "video": "https://www.youtube.com/watch?v=VInQkeec188" },
-        { "level": "Speed Racer", "creator": "ZenthicAlpha", "difficulty": "Easy Demon", "video": "https://www.youtube.com/watch?v=R8RsJVKKd8w" },
-        { "level": "THE LIGHTNING ROAD", "creator": "timeless real", "difficulty": "Easy Demon", "video": "https://www.youtube.com/watch?v=smwunc7UiHk" },
-        { "level": "The Nightmare", "creator": "Jax", "difficulty": "Easy Demon", "video": "https://www.youtube.com/watch?v=i0dlZgqA8ds" }
+            "enjoyment": "6/10",
+            "attempts": 0,
+            "dateAdded": "January 1, 0000",
+            "thoughts": "Still haven't rebeat this one, going to do it in a bit."
+        },
+        { 
+            "level": "X", 
+            "creator": "Triaxis", 
+            "difficulty": "Easy Demon", 
+            "video": "https://www.youtube.com/watch?v=IRTQZZ502J0",
+            "enjoyment": "0/10",
+            "attempts": 0,
+            "dateAdded": "January 1, 0000",
+            "thoughts": "Still haven't rebeat this one, going to do it in a bit."
+        },
+        { 
+            "level": "X", 
+            "creator": "Triaxis", 
+            "difficulty": "Easy Demon", 
+            "video": "https://www.youtube.com/watch?v=IRTQZZ502J0",
+            "enjoyment": "0/10",
+            "attempts": 0,
+            "dateAdded": "January 1, 0000",
+            "thoughts": "Still haven't rebeat this one, going to do it in a bit."
+        },{ 
+            "level": "Platinum Adventure", 
+            "creator": "Jerry4", 
+            "difficulty": "Easy Demon", 
+            "video": "https://www.youtube.com/watch?v=IRTQZZ502J0",
+            "enjoyment": "0/10",
+            "attempts": 0,
+            "dateAdded": "January 1, 0000",
+            "thoughts": "Still haven't rebeat this one, going to do it in a bit."
+        },
+        { 
+            "level": "Clubstep", 
+            "creator": "Robtop", 
+            "difficulty": "Easy Demon", 
+            "video": "https://www.youtube.com/watch?v=IRTQZZ502J0",
+            "enjoyment": "0/10",
+            "attempts": 0,
+            "dateAdded": "January 1, 0000",
+            "thoughts": "Still haven't rebeat this one, going to do it in a bit."
+        },
+         { 
+            "level": "Speed Racer", 
+            "creator": "ZenthicAlpha", 
+            "difficulty": "Easy Demon", 
+            "video": "https://www.youtube.com/watch?v=IRTQZZ502J0",
+            "enjoyment": "0/10",
+            "attempts": 0,
+            "dateAdded": "January 1, 0000",
+            "thoughts": "Still haven't rebeat this one, going to do it in a bit."
+        },
+         { 
+            "level": "THE LIGHTNING ROAD", 
+            "creator": "timeless real", 
+            "difficulty": "Easy Demon", 
+            "video": "https://www.youtube.com/watch?v=IRTQZZ502J0",
+            "enjoyment": "0/10",
+            "attempts": 0,
+            "dateAdded": "January 1, 0000",
+            "thoughts": "Still haven't rebeat this one, going to do it in a bit."
+        },
+        { 
+            "level": "The Nightmare", 
+            "creator": "Jax", 
+            "difficulty": "Easy Demon", 
+            "video": "https://www.youtube.com/watch?v=IRTQZZ502J0",
+            "enjoyment": "0/10",
+            "attempts": 0,
+            "dateAdded": "January 1, 0000",
+            "thoughts": "Still haven't rebeat this one, going to do it in a bit."
+        },
     ]
 };
 
