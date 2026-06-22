@@ -2,138 +2,104 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Hardests List</title>
+    <title>Creator+ - Hardests</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Make table rows visually look clickable */
-        tbody tr {
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-        tbody tr:hover td {
-            background-color: var(--row-hover) !important;
-        }
+        /* Table interactive row rules */
+        tbody tr { cursor: pointer; }
+        tbody tr:hover td { background-color: var(--row-hover) !important; }
 
         /* ------------------------------------------
-           SLEEK LEVEL INFO MODAL POP-UP STYLES
+           SUBPAGE SHOWCASE COMPONENT STYLES
         ------------------------------------------ */
-        .level-modal {
-            display: none; /* Hidden by default */
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(5px);
-            align-items: center;
-            justify-content: center;
+        .subpage-container {
+            animation: fadeIn 0.4s ease;
+            text-align: center;
         }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .modal-content {
-            background-color: #181b22;
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            width: 90%;
-            max-width: 500px;
-            padding: 2rem;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            animation: modalSlideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .subpage-header {
+            margin-bottom: 1.5rem;
         }
-
-        @keyframes modalSlideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .close-modal-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.8rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .close-modal-btn:hover {
-            color: #ef4444;
-        }
-
-        .modal-title {
-            font-size: 1.8rem;
-            font-weight: bold;
+        .subpage-header h2 {
+            font-size: 2.2rem;
             color: #fff;
             margin-bottom: 0.2rem;
         }
-
-        .modal-author {
+        .subpage-header p {
             color: var(--text-muted);
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.8rem;
+            font-size: 1.1rem;
         }
 
-        /* Stats Grid Layout inside the pop-up subpage */
-        .modal-info-grid {
+        /* Large Centered Showcase Video Box */
+        .subpage-video-frame {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .subpage-video-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Metrics Horizontal Flex Layout */
+        .metrics-row {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 1.5rem;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 2rem;
         }
-
-        .info-pill {
-            background: #11141a;
-            border: 1px solid #242936;
-            padding: 10px;
-            border-radius: 6px;
+        .metric-card {
+            background: #181b22;
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 8px;
         }
-
-        .info-pill span {
+        .metric-card span {
             display: block;
             font-size: 0.75rem;
             text-transform: uppercase;
             color: var(--text-muted);
-            letter-spacing: 0.5px;
-            margin-bottom: 2px;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .metric-card strong {
+            font-size: 1.3rem;
+            color: var(--accent-color);
         }
 
-        .info-pill strong {
-            font-size: 1.1rem;
-            color: #fff;
-        }
-
-        .level-description-box {
-            background: #11141a;
-            border: 1px dashed var(--border-color);
-            padding: 12px;
-            border-radius: 6px;
+        /* Custom Italics Thoughts Blockquote */
+        .thoughts-box {
             font-style: italic;
             color: #cbd5e1;
-            font-size: 0.95rem;
-            line-height: 1.4;
-            margin-bottom: 1.5rem;
-            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto 2.5rem auto;
+            padding: 0 1.5rem;
+            border-left: 3px solid var(--border-color);
+            text-align: left;
         }
 
-        .modal-action-btn {
-            display: block;
-            width: 100%;
-            text-align: center;
-            background-color: var(--accent-color);
+        .back-btn {
+            display: inline-block;
+            background-color: #181b22;
+            border: 1px solid var(--border-color);
             color: #fff;
-            padding: 12px;
+            padding: 10px 20px;
             border-radius: 6px;
-            font-weight: bold;
             text-decoration: none;
-            transition: background-color 0.2s;
+            font-weight: bold;
+            transition: all 0.2s;
         }
-
-        .modal-action-btn:hover {
-            background-color: #4338ca; /* Darker accent overlay */
+        .back-btn:hover {
+            border-color: var(--accent-color);
+            background-color: #242936;
         }
     </style>
 </head>
@@ -151,24 +117,24 @@
             <a href="levels.html" class="nav-btn">Levels</a>
         </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th style="text-align: center;">Rank</th>
-                    <th>Level / Creator</th>
-                    <th>Showcase</th>
-                </tr>
-            </thead>
-            <tbody id="demonlist-body"></tbody>
-        </table>
-        <div class="disclaimer-note">I don't have completion videos for these so just Trust me bro.</div>
-    </div>
+        <!-- MAIN OVERVIEW VIEW CONTAINER -->
+        <div id="main-list-view">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">Rank</th>
+                        <th>Level / Creator</th>
+                        <th>Showcase</th>
+                    </tr>
+                </thead>
+                <tbody id="demonlist-body"></tbody>
+            </table>
+            <div class="disclaimer-note">Click level to view more info.</div>
+        </div>
 
-    <div id="level-info-modal" class="level-modal">
-        <div class="modal-content">
-            <span class="close-modal-btn" id="close-modal">&times;</span>
-            <div id="modal-body-content">
-                </div>
+        <!-- SPECIFIC SINGLE LEVEL SUBPAGE CONTAINER -->
+        <div id="single-level-view" class="subpage-container" style="display: none;">
+            <!-- Content will generate dynamically via routing parameters -->
         </div>
     </div>
 
@@ -176,112 +142,96 @@
     <script>
         window.onload = function() {
             initGlobalLayout();
-            const tbody = document.getElementById('demonlist-body');
-            const modal = document.getElementById('level-info-modal');
-            const closeModalBtn = document.getElementById('close-modal');
-            const modalBody = document.getElementById('modal-body-content');
+            
+            const listView = document.getElementById('main-list-view');
+            const singleView = document.getElementById('single-level-view');
+            
+            // Core Query Routing Parser: Reads url suffix parameters (e.g., ?9)
+            const queryParam = window.location.search.substring(1);
+            const targetRank = parseInt(queryParam, 10);
 
-            // 1. Build and render your main hardests list table row elements
-            DATA.demonlist.forEach((item, index) => {
-                const tr = document.createElement('tr');
-                
-                let diffHtml = '';
-                if (item.difficulty) {
-                    const clean = item.difficulty.toLowerCase().trim();
-                    let gClass = clean === 'easy demon' ? 'easy-demon' : clean === 'medium demon' ? 'medium-demon' : '';
-                    diffHtml = ` • <span class="diff-tag ${gClass}">${item.difficulty}</span>`;
-                }
-                
-                const vId = getYouTubeId(item.video);
-                const thumb = vId ? `<img src="https://img.youtube.com/vi/${vId}/mqdefault.jpg" class="yt-thumb">` : '';
-                const btn = item.video ? `<a href="${item.video}" target="_blank" class="video-link" onclick="event.stopPropagation();">Watch</a>` : `<span class="no-link">—</span>`;
-
-                tr.innerHTML = `
-                    <td class="rank-col">#${index + 1}</td>
-                    <td><div class="level-name">${item.level}</div><div class="creator-name">by ${item.creator}${diffHtml}</div></td>
-                    <td><div class="showcase-cell">${thumb}${btn}</div></td>`;
-                
-                // 2. Click Event Listener: Triggers when clicking anywhere on the table row!
-                tr.onclick = function() {
-                    openLevelSubpage(item.level, item.creator, item.video);
-                };
-
-                tbody.appendChild(tr);
-            });
-
-            // 3. Dynamic Subpage Pop-Up Generation Core Logic
-            function openLevelSubpage(levelName, creatorName, videoUrl) {
-                // Initialize pop-up instantly with a sleek loading animation state
-                modal.style.display = "flex";
-                modalBody.innerHTML = `
-                    <div class="modal-title">${levelName}</div>
-                    <div class="modal-author">by ${creatorName}</div>
-                    <div style="text-align: center; color: var(--text-muted); padding: 2rem 0;">
-                        Gathering records from GD servers...
-                    </div>`;
-
-                // Query the GD Browser level analytics search endpoint
-                fetch(`https://gdbrowser.com/api/search/${encodeURIComponent(levelName)}`)
-                    .then(res => res.json())
-                    .then(results => {
-                        // Locate the specific item corresponding to the exact author target parameters
-                        let targetLevel = Array.isArray(results) ? results.find(l => l.author.toLowerCase() === creatorName.toLowerCase()) : null;
-                        
-                        // Fallback: If exact match isn't found, just grab the first matching result name
-                        if (!targetLevel && Array.isArray(results) && results.length > 0) {
-                            targetLevel = results[0];
-                        }
-
-                        if (!targetLevel || targetLevel.error) {
-                            modalBody.innerHTML = `
-                                <div class="modal-title">${levelName}</div>
-                                <div class="modal-author">by ${creatorName}</div>
-                                <div style="text-align:center; color:#ef4444; padding: 1rem 0;">Could not match this level to online database items.</div>
-                                ${videoUrl ? `<a href="${videoUrl}" target="_blank" class="modal-action-btn">Watch Video Showcase</a>` : ''}
-                            `;
-                            return;
-                        }
-
-                        // Map out parsed data outputs variables safely
-                        const id = targetLevel.id || "Unknown";
-                        const downloads = targetLevel.downloads ? targetLevel.downloads.toLocaleString() : "0";
-                        const likes = targetLevel.likes ? targetLevel.likes.toLocaleString() : "0";
-                        const objects = targetLevel.objects ? targetLevel.objects.toLocaleString() : "N/A";
-                        const length = targetLevel.length || "Medium";
-                        const description = targetLevel.description ? `"${targetLevel.description}"` : "No level description provided.";
-
-                        // Replace container elements with our beautifully configured layout block modules
-                        modalBody.innerHTML = `
-                            <div class="modal-title">${targetLevel.name}</div>
-                            <div class="modal-author">by ${targetLevel.author} • ID: ${id}</div>
-                            
-                            <div class="level-description-box">${description}</div>
-
-                            <div class="modal-info-grid">
-                                <div class="info-pill"><span>Downloads</span><strong>📥 ${downloads}</strong></div>
-                                <div class="info-pill"><span>Likes</span><strong>👍 ${likes}</strong></div>
-                                <div class="info-pill"><span>Objects Count</span><strong>🧱 ${objects}</strong></div>
-                                <div class="info-pill"><span>Length</span><strong>⏱️ ${length}</strong></div>
-                            </div>
-
-                            <a href="https://gdbrowser.com/${id}" target="_blank" class="modal-action-btn" style="background:#22c55e; margin-bottom:10px;">Open on GD Browser</a>
-                            ${videoUrl ? `<a href="${videoUrl}" target="_blank" class="modal-action-btn">Watch My Completion Video</a>` : ''}
-                        `;
-                    })
-                    .catch(() => {
-                        modalBody.innerHTML = `
-                            <div class="modal-title">${levelName}</div>
-                            <div class="modal-author">by ${creatorName}</div>
-                            <div style="text-align:center; color:#ef4444; padding:1rem 0;">Network timeout. Check your connection.</div>
-                        `;
-                    });
+            if (!isNaN(targetRank) && targetRank > 0 && targetRank <= DATA.demonlist.length) {
+                // If a rank match query parameter exists, instantly load the subpage configuration view
+                listView.style.display = "none";
+                singleView.style.display = "block";
+                renderLevelSubpage(targetRank - 1);
+            } else {
+                // Otherwise, display standard default main listing dashboard table chart
+                listView.style.display = "block";
+                singleView.style.display = "none";
+                renderMainTable();
             }
 
-            // Close modal functions mapping
-            closeModalBtn.onclick = function() { modal.style.display = "none"; };
-            window.onclick = function(event) {
-                if (event.target == modal) { modal.style.display = "none"; }
-            };
+            // 1. Build normal list layout summary rows
+            function renderMainTable() {
+                const tbody = document.getElementById('demonlist-body');
+                DATA.demonlist.forEach((item, index) => {
+                    const tr = document.createElement('tr');
+                    const currentRank = index + 1;
+                    
+                    let diffHtml = '';
+                    if (item.difficulty) {
+                        const clean = item.difficulty.toLowerCase().trim();
+                        let gClass = clean === 'easy demon' ? 'easy-demon' : clean === 'medium demon' ? 'medium-demon' : '';
+                        diffHtml = ` • <span class="diff-tag ${gClass}">${item.difficulty}</span>`;
+                    }
+                    
+                    const vId = getYouTubeId(item.video);
+                    const thumb = vId ? `<img src="https://img.youtube.com/vi/${vId}/mqdefault.jpg" class="yt-thumb">` : '';
+                    
+                    tr.innerHTML = `
+                        <td class="rank-col">#${currentRank}</td>
+                        <td><div class="level-name">${item.level}</div><div class="creator-name">by ${item.creator}${diffHtml}</div></td>
+                        <td><div class="showcase-cell">${thumb}<span class="video-link">View Stats</span></div></td>`;
+                    
+                    // Route users directly onto query extension path link upon row select
+                    tr.onclick = function() {
+                        window.location.search = `?${currentRank}`;
+                    };
+                    tbody.appendChild(tr);
+                });
+            }
+
+            // 2. Build full dedicated screen layout view for target individual completions
+            function renderLevelSubpage(indexOffset) {
+                const item = DATA.demonlist[indexOffset];
+                const videoId = getYouTubeId(item.video);
+                
+                // Fallbacks in case an array item lacks explicit parameter metrics
+                const enjoyment = item.enjoyment || "N/A";
+                const attempts = item.attempts ? item.attempts.toLocaleString() : "N/A";
+                const dateAdded = item.dateAdded || "Unspecified Date";
+                const thoughts = item.thoughts || "No custom analytical thoughts left for this entry.";
+
+                singleView.innerHTML = `
+                    <div class="subpage-header">
+                        <h2>${item.level}</h2>
+                        <p>Completed Hardest Ranked #${indexOffset + 1} • by ${item.creator}</p>
+                    </div>
+
+                    <div class="subpage-video-frame">
+                        ${videoId ? `
+                            <iframe 
+                                src="https://www.youtube.com/embed/${videoId}" 
+                                title="Completion Showcase Video" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>` : `<div style="display:flex; align-items:center; justify-content:center; height:100%; color:var(--text-muted);">No showcase video available.</div>`}
+                    </div>
+
+                    <div class="metrics-row">
+                        <div class="metric-card"><span>Enjoyability</span><strong>${enjoyment}</strong></div>
+                        <div class="metric-card"><span>Attempts</span><strong>${attempts}</strong></div>
+                        <div class="metric-card"><span>Date Logged</span><strong>${dateAdded}</strong></div>
+                    </div>
+
+                    <div class="thoughts-box">
+                        "${thoughts}"
+                    </div>
+
+                    <a href="list.html" class="back-btn">← Return to List</a>
+                `;
+            }
         };
     </script>
 </body>
