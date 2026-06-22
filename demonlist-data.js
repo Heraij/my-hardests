@@ -67,15 +67,6 @@ const DATA = {
             "thoughts": "Still haven't rebeat this one, going to do it in a bit."
         },
         { 
-            "level": "X", 
-            "creator": "Triaxis", 
-            "difficulty": "Easy Demon", 
-            "video": "https://www.youtube.com/watch?v=IRTQZZ502J0",
-            "enjoyment": "0/10",
-            "attempts": 0,
-            "dateAdded": "January 1, 0000",
-            "thoughts": "Still haven't rebeat this one, going to do it in a bit."
-        },{ 
             "level": "Platinum Adventure", 
             "creator": "Jerry4", 
             "difficulty": "Easy Demon", 
