@@ -58,11 +58,11 @@ const DATA = {
             "level": "X", 
             "creator": "Triaxis", 
             "difficulty": "Easy Demon", 
-            "video": "https://www.youtube.com/watch?v=IRTQZZ502J0",
-            "enjoyment": "0/10",
-            "attempts": 0,
-            "dateAdded": "January 1, 0000",
-            "thoughts": "Still haven't rebeat this one, going to do it in a bit."
+            "video": "https://youtu.be/GpN0Mfy5t8s",
+            "enjoyment": "6/10",
+            "attempts": 163,
+            "dateAdded": "June 23, 2026",
+            "thoughts": "Alot harder then I ever wanted to do this, bug on start of dual is bad."
         },
         { 
             "level": "Platinum Adventure", 
