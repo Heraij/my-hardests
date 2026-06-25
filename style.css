@@ -12,6 +12,34 @@
     outline: none !important;               
     padding: 0 !important;                  
 }
+/* Insane Demon List Tag Styling */
+.diff-tag.insane-demon {
+    display: inline !important;
+    visibility: visible !important;
+    color: #d946ef !important;              /* Vibrant Insane Demon Magenta/Pink */
+    font-family: inherit !important;
+    font-size: inherit !important;
+    font-weight: bold !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    padding: 0 !important;
+}
+
+/* Extreme Demon List Tag Styling */
+.diff-tag.extreme-demon {
+    display: inline !important;
+    visibility: visible !important;
+    color: #ffffff !important;              /* Clean white text base */
+    text-shadow: 0 0 4px #ff0000 !important; /* Aggressive dark red glow aura */
+    font-family: inherit !important;
+    font-size: inherit !important;
+    font-weight: bold !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    padding: 0 !important;
+}
 /* ==========================================================================
    TOTAL GLOBAL HELL MODE OVERRIDE FOR NINE CIRCLES
    ========================================================================== */
