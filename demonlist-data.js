@@ -9,7 +9,7 @@ const DATA = {
     
     goals: [
         { text: "Have 10 subscribers on YT", completed: false },
-        { text: "Beat a Hard demon - Jun 25 2026, completed: true },
+        { text: "Beat a Hard demon - Jun 25 2026", completed: true },
         { text: "Get a Creator point", completed: false }
     ],
 
