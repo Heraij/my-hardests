@@ -16,17 +16,22 @@
     -webkit-text-fill-color: transparent !important; /* Makes the font show the gradient instead of a solid color */
 }
 
-/* Insane Demon - Clean structural fallback */
+/* Insane Demon - No Outline, Aggressive Red-to-Orange Gradient */
 .diff-tag.insane-demon {
-    display: inline !important;
+    display: inline-block !important; /* Required for text gradients to calculate widths */
     visibility: visible !important;
-    color: #ff4ef8 !important; /* Bright magenta/pink */
     font-family: inherit !important;
     font-size: inherit !important;
     font-weight: bold !important;
-    background: transparent !important;
-    -webkit-text-fill-color: initial !important;
     text-shadow: none !important;
+    -webkit-text-stroke: none !important;
+    text-stroke: none !important;
+    
+    /* Apply your custom hex color gradient code */
+    background: linear-gradient(180deg, #910404 0%, #913804 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important; /* Makes the font show the gradient instead of a solid color */
 }
 
 /* Hard Demon - Sharp and clean */
