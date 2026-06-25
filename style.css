@@ -1,4 +1,132 @@
 /* ==========================================================================
+   TOTAL GLOBAL HELL MODE OVERRIDE FOR NINE CIRCLES
+   ========================================================================== */
+
+/* 1. Global Viewport Overrides */
+body.nine-circles-hell-mode {
+    background: #050101 !important;
+    background-image: 
+        radial-gradient(circle at 50% 0%, #3a0808 0%, transparent 70%),
+        radial-gradient(circle at 100% 100%, #150202 0%, #050101 100%) !important;
+    color: #f87171 !important;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. Main Page Layout Container Box */
+body.nine-circles-hell-mode .container {
+    background: rgba(10, 2, 2, 0.8) !important;
+    border: 2px solid #ff2222 !important;
+    box-shadow: 0 0 40px rgba(255, 0, 0, 0.25), inset 0 0 20px rgba(0, 0, 0, 0.9) !important;
+    backdrop-filter: blur(8px);
+}
+
+/* 3. Global Header Text & Descriptions */
+body.nine-circles-hell-mode header h1 {
+    color: #ffffff !important;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 0 0 20px #ff0000 !important;
+}
+body.nine-circles-hell-mode header p {
+    color: #fca5a5 !important;
+}
+
+/* 4. Navigation Menu & Button System Overrides */
+body.nine-circles-hell-mode .nav-menu {
+    border-bottom: 2px dashed #ff3333 !important;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+body.nine-circles-hell-mode .nav-btn {
+    background: #140303 !important;
+    border: 1px solid #7f1d1d !important;
+    color: #ef4444 !important;
+    text-shadow: none !important;
+    transition: all 0.3s ease;
+}
+
+/* Hovering over any Nav link during Hell Mode */
+body.nine-circles-hell-mode .nav-btn:hover {
+    background: #ff2222 !important;
+    color: #000000 !important;
+    border-color: #ffffff !important;
+    box-shadow: 0 0 15px #ff2222 !important;
+    font-weight: bold;
+}
+
+/* Active Nav Button Highlighting (The List Page itself) */
+body.nine-circles-hell-mode .nav-btn.active {
+    background: linear-gradient(180deg, #7f1d1d 0%, #3b0712 100%) !important;
+    border: 2px solid #ff2222 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(255, 34, 34, 0.4) !important;
+}
+
+/* 5. Subpage Header & Titles */
+body.nine-circles-hell-mode .subpage-header h2 {
+    color: #ff3333 !important;
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #990000, 0 0 40px #ff5555 !important;
+    font-family: 'Impact', 'Arial Black', sans-serif !important;
+    font-size: 3rem !important;
+    letter-spacing: 3px !important;
+    text-transform: uppercase;
+    animation: nc-pulse 1.5s infinite alternate !important;
+}
+
+body.nine-circles-hell-mode .subpage-header p {
+    color: #fca5a5 !important;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+/* 6. Showcase Video & Information Blocks */
+body.nine-circles-hell-mode .subpage-video-frame {
+    border: 3px solid #ff2222 !important;
+    box-shadow: 0 0 35px rgba(255, 0, 0, 0.4) !important;
+}
+
+body.nine-circles-hell-mode .metric-card {
+    background: #140505 !important;
+    border: 2px solid #ff2222 !important;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.2) !important;
+}
+
+body.nine-circles-hell-mode .metric-card span {
+    color: #ef4444 !important;
+    font-weight: bold;
+}
+
+body.nine-circles-hell-mode .metric-card strong {
+    color: #ffffff !important;
+    text-shadow: 0 0 8px #ff3333 !important;
+}
+
+body.nine-circles-hell-mode .thoughts-box {
+    border-left: 4px solid #ff2222 !important;
+    background: linear-gradient(90deg, rgba(255, 0, 0, 0.07) 0%, transparent 100%) !important;
+    color: #fee2e2 !important;
+}
+
+body.nine-circles-hell-mode .back-btn {
+    background-color: #1a0606 !important;
+    border: 2px solid #ff3333 !important;
+    color: #ff3333 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+body.nine-circles-hell-mode .back-btn:hover {
+    background-color: #ff2222 !important;
+    color: #000000 !important;
+    box-shadow: 0 0 20px #ff2222 !important;
+}
+
+/* Dynamic pulse keyframe adjustments */
+@keyframes nc-pulse {
+    0% { transform: scale(1); text-shadow: 0 0 10px #ff0000, 0 0 20px #990000; }
+    100% { transform: scale(1.02); text-shadow: 0 0 20px #ff4444, 0 0 35px #ff0000, 0 0 50px #990000; }
+}
+/* ==========================================================================
    NINE CIRCLES SPECIAL HELLISH OVERRIDE STYLES
    ========================================================================== */
 
