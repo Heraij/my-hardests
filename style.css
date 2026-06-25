@@ -1,12 +1,13 @@
-/* Hard Demon List Tag Styling - Cleaned Up */
 .diff-tag.hard-demon {
-    background-color: rgba(185, 28, 28, 0.15) !important; /* Muted crimson */
-    border: 1px solid rgba(239, 68, 68, 0.5) !important;  /* Subtle red outline */
-    color: #f87171 !important;                            /* Soft red text */
-    padding: 2px 6px !important;                          /* Prevents it from looking bulky */
-    border-radius: 4px !important;                        /* Matches standard tag curves */
-    font-size: 0.75rem !important;                        /* Keeps it neatly scaled */
-    display: inline-block !important;
+    background-color: rgba(239, 68, 68, 0.1) !important;
+    border: none !important;                /* Destroys the ugly outer border entirely */
+    outline: none !important;               /* Failsafe to remove any hidden outline boxes */
+    color: #ff6b6b !important;
+    font-family: inherit !important;        /* Forces it to use the exact same font as the rest of the line */
+    font-size: inherit !important;          /* Keeps the text size identical to your other tags */
+    font-weight: bold !important;
+    padding: 0 !important;                  /* Strips out the boxy spacing */
+    background: none !important;            /* If you just want pure clean text without any box background */
 }
 /* ==========================================================================
    TOTAL GLOBAL HELL MODE OVERRIDE FOR NINE CIRCLES
