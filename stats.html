@@ -103,7 +103,7 @@
 
         <!-- TIME MACHINE HUB INTERFACE -->
         <div class="time-machine-box">
-            <h3>⏳ GD Progress Time Machine</h3>
+            <h3>GD Progress Time Machine</h3>
             <input type="range" id="time-slider" class="timeline-slider" min="0" max="0" value="0">
             <div id="time-display" class="current-time-display">Connecting Temporal Anchor...</div>
         </div>
@@ -216,7 +216,7 @@
 
             // Simple static social box generator
             const scBox = document.getElementById('socials-panel-container');
-            const targetedSocials = DATA.socials ? DATA.socials : { "YouTube": "@Heraijs", "Discord": "xyz" };
+            const targetedSocials = DATA.socials ? DATA.socials : { "YouTube": "@creatorplusgd", "Discord": "@heraij" };
             let socialHtml = '<div class="panel-row-split">';
             Object.entries(targetedSocials).forEach(([platform, handle]) => {
                 socialHtml += `<div class="social-panel"><h4>${platform.toUpperCase()}</h4><p>${handle}</p></div>`;
