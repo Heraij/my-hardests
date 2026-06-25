@@ -170,11 +170,17 @@
                     const currentRank = index + 1;
                     
                     let diffHtml = '';
-                    if (item.difficulty) {
-                        const clean = item.difficulty.toLowerCase().trim();
-                        let gClass = clean === 'easy demon' ? 'easy-demon' : clean === 'medium demon' ? 'medium-demon' : '';
-                        diffHtml = ` • <span class="diff-tag ${gClass}">${item.difficulty}</span>`;
-                    }
+if (item.difficulty) {
+    const clean = item.difficulty.toLowerCase().trim();
+    
+    // Assign the proper class name based on game difficulty settings
+    let gClass = '';
+    if (clean === 'easy demon') gClass = 'easy-demon';
+    else if (clean === 'medium demon') gClass = 'medium-demon';
+    else if (clean === 'hard demon') gClass = 'hard-demon'; // Added this line!
+    
+    diffHtml = ` • <span class="diff-tag ${gClass}">${item.difficulty}</span>`;
+}
                     
                     const vId = getYouTubeId(item.video);
                     const thumb = vId ? `<img src="https://img.youtube.com/vi/${vId}/mqdefault.jpg" class="yt-thumb">` : '';
