@@ -1,28 +1,32 @@
-/* Extreme Demon - Clean White with a Dark Outline */
+/* Extreme Demon - No Outline, Smooth Dark Gradient */
 .diff-tag.extreme-demon {
-    display: inline !important;
+    display: inline-block !important; /* Required for text gradients to calculate widths */
     visibility: visible !important;
-    color: #ffffff !important;         /* Pure crisp white font text */
     font-family: inherit !important;
     font-size: inherit !important;
     font-weight: bold !important;
     text-shadow: none !important;
+    -webkit-text-stroke: none !important; /* Destroys all outlines */
+    text-stroke: none !important;
     
-    /* A dark, heavy border outline around the clean white letters */
-    -webkit-text-stroke: 1px #8b0000 !important; 
-    text-stroke: 1px #8b0000 !important;
+    /* Apply your exact custom hex color gradient code */
+    background: linear-gradient(180deg, #5e040e 0%, #5e041f 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important; /* Makes the font show the gradient instead of a solid color */
 }
 
-/* Insane Demon - Base structural fallback */
+/* Insane Demon - Clean structural fallback */
 .diff-tag.insane-demon {
     display: inline !important;
     visibility: visible !important;
-    color: #ff4ef8 !important; 
+    color: #ff4ef8 !important; /* Bright magenta/pink */
     font-family: inherit !important;
     font-size: inherit !important;
     font-weight: bold !important;
+    background: transparent !important;
+    -webkit-text-fill-color: initial !important;
     text-shadow: none !important;
-    -webkit-text-stroke: 0px !important;
 }
 
 /* Hard Demon - Sharp and clean */
