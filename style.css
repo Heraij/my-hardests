@@ -1,72 +1,249 @@
-/* Extreme Demon - No Outline, Smooth Dark Gradient */
-.diff-tag.extreme-demon {
-    display: inline-block !important; /* Required for text gradients to calculate widths */
-    visibility: visible !important;
-    font-family: inherit !important;
-    font-size: inherit !important;
-    font-weight: bold !important;
-    text-shadow: none !important;
-    -webkit-text-stroke: none !important; /* Destroys all outlines */
-    text-stroke: none !important;
-    
-    /* Apply your exact custom hex color gradient code */
-    background: linear-gradient(180deg, #5e040e 0%, #5e041f 100%) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important; /* Makes the font show the gradient instead of a solid color */
+/* ==========================================================================
+   GLOBAL BASE LAYOUT & NAVIGATION
+   ========================================================================== */
+body {
+    background-color: #0d1117;
+    color: #c9d1d9;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    transition: background 0.5s ease, color 0.5s ease;
 }
 
-/* Insane Demon - No Outline, Aggressive Red-to-Orange Gradient */
-.diff-tag.insane-demon {
-    display: inline-block !important; /* Required for text gradients to calculate widths */
-    visibility: visible !important;
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #161b22;
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s ease;
+}
+
+header h1 {
+    color: #f0f6fc;
+    margin-top: 0;
+}
+
+header p {
+    color: #8b949e;
+}
+
+.nav-menu {
+    margin-bottom: 20px;
+}
+
+.nav-btn {
+    background: #21262d;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-right: 8px;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.nav-btn:hover {
+    background: #30363d;
+    border-color: #8b949e;
+}
+
+.nav-btn.active {
+    background: #1f6feb;
+    border-color: #388bfd;
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   TABLE & DATA LIST STYLING
+   ========================================================================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #30363d;
+}
+
+th {
+    color: #f0f6fc;
+    font-weight: 600;
+}
+
+.rank-col {
+    width: 10%;
+    font-weight: bold;
+    color: #f0883e;
+}
+
+.level-link {
+    color: #58a6ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.level-link:hover {
+    text-decoration: underline;
+}
+
+.creator-text {
+    font-size: 0.85rem;
+    color: #8b949e;
+    margin-top: 2px;
+}
+
+/* ==========================================================================
+   BULLETPROOF DEMON DIFFICULTY TAG SYSTEM
+   ========================================================================== */
+.diff-tag {
     font-family: inherit !important;
     font-size: inherit !important;
     font-weight: bold !important;
     text-shadow: none !important;
     -webkit-text-stroke: none !important;
     text-stroke: none !important;
-    
-    /* Apply your custom hex color gradient code */
-    background: linear-gradient(180deg, #910404 0%, #913804 100%) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important; /* Makes the font show the gradient instead of a solid color */
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    padding: 0 !important;
 }
 
-/* Hard Demon - Sharp and clean */
+.diff-tag.easy-demon {
+    display: inline !important;
+    visibility: visible !important;
+    color: #4ade80 !important; /* Clean operational green */
+}
+
+.diff-tag.medium-demon {
+    display: inline !important;
+    visibility: visible !important;
+    color: #38bdf8 !important; /* Clean operational blue */
+}
+
 .diff-tag.hard-demon {
     display: inline !important;
     visibility: visible !important;
-    color: #ff4444 !important;
-    font-family: inherit !important;
-    font-size: inherit !important;
-    font-weight: bold !important;
+    color: #ff4444 !important; /* Sharp crimson red */
 }
+
+.diff-tag.insane-demon {
+    display: inline-block !important; /* Required for linear-gradients */
+    visibility: visible !important;
+    background: linear-gradient(180deg, #910404 0%, #913804 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.diff-tag.extreme-demon {
+    display: inline-block !important; /* Required for linear-gradients */
+    visibility: visible !important;
+    background: linear-gradient(180deg, #5e040e 0%, #5e041f 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* ==========================================================================
+   LEVEL DETAILS & INFORMATION SUBPAGE ELEMENTS
+   ========================================================================== */
+.subpage-header h2 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.subpage-video-container {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.subpage-video-frame {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.metric-card {
+    background: #21262d;
+    border: 1px solid #30363d;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+.metric-card span {
+    display: block;
+    font-size: 0.8rem;
+    color: #8b949e;
+    margin-bottom: 4px;
+}
+
+.metric-card strong {
+    font-size: 1.2rem;
+    color: #c9d1d9;
+}
+
+.thoughts-box {
+    background: rgba(56, 139, 253, 0.05);
+    border-left: 4px solid #1f6feb;
+    padding: 15px;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+.back-btn {
+    display: inline-block;
+    background: #21262d;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    background: #30363d;
+}
+
 /* ==========================================================================
    TOTAL GLOBAL HELL MODE OVERRIDE FOR NINE CIRCLES
    ========================================================================== */
 
-/* 1. Global Viewport Overrides */
+/* 1. Viewport Animation Triggers */
 body.nine-circles-hell-mode {
-    background: #050101 !important;
-    background-image: 
-        radial-gradient(circle at 50% 0%, #3a0808 0%, transparent 70%),
-        radial-gradient(circle at 100% 100%, #150202 0%, #050101 100%) !important;
     color: #f87171 !important;
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: nc-wave-strobe 1.4s infinite linear !important;
+    transition: color 0.5s ease;
 }
 
-/* 2. Main Page Layout Container Box */
+/* 2. Layout Container Override */
 body.nine-circles-hell-mode .container {
-    background: rgba(10, 2, 2, 0.8) !important;
+    background: rgba(10, 2, 2, 0.85) !important;
     border: 2px solid #ff2222 !important;
     box-shadow: 0 0 40px rgba(255, 0, 0, 0.25), inset 0 0 20px rgba(0, 0, 0, 0.9) !important;
     backdrop-filter: blur(8px);
 }
 
-/* 3. Global Header Text & Descriptions */
+/* 3. Header Styling Overrides */
 body.nine-circles-hell-mode header h1 {
     color: #ffffff !important;
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 0 0 20px #ff0000 !important;
@@ -75,7 +252,7 @@ body.nine-circles-hell-mode header p {
     color: #fca5a5 !important;
 }
 
-/* 4. Navigation Menu & Button System Overrides */
+/* 4. Navigation Menu Overrides */
 body.nine-circles-hell-mode .nav-menu {
     border-bottom: 2px dashed #ff3333 !important;
     padding-bottom: 15px;
@@ -87,10 +264,8 @@ body.nine-circles-hell-mode .nav-btn {
     border: 1px solid #7f1d1d !important;
     color: #ef4444 !important;
     text-shadow: none !important;
-    transition: all 0.3s ease;
 }
 
-/* Hovering over any Nav link during Hell Mode */
 body.nine-circles-hell-mode .nav-btn:hover {
     background: #ff2222 !important;
     color: #000000 !important;
@@ -99,7 +274,6 @@ body.nine-circles-hell-mode .nav-btn:hover {
     font-weight: bold;
 }
 
-/* Active Nav Button Highlighting (The List Page itself) */
 body.nine-circles-hell-mode .nav-btn.active {
     background: linear-gradient(180deg, #7f1d1d 0%, #3b0712 100%) !important;
     border: 2px solid #ff2222 !important;
@@ -107,7 +281,7 @@ body.nine-circles-hell-mode .nav-btn.active {
     box-shadow: 0 0 15px rgba(255, 34, 34, 0.4) !important;
 }
 
-/* 5. Subpage Header & Titles */
+/* 5. Subpage Text Overrides */
 body.nine-circles-hell-mode .subpage-header h2 {
     color: #ff3333 !important;
     text-shadow: 0 0 10px #ff0000, 0 0 20px #990000, 0 0 40px #ff5555 !important;
@@ -115,7 +289,7 @@ body.nine-circles-hell-mode .subpage-header h2 {
     font-size: 3rem !important;
     letter-spacing: 3px !important;
     text-transform: uppercase;
-    animation: nc-pulse 1.5s infinite alternate !important;
+    animation: nc-text-pulse 1.5s infinite alternate !important;
 }
 
 body.nine-circles-hell-mode .subpage-header p {
@@ -124,7 +298,7 @@ body.nine-circles-hell-mode .subpage-header p {
     letter-spacing: 1px;
 }
 
-/* 6. Showcase Video & Information Blocks */
+/* 6. Media Cards & Mechanics Overrides */
 body.nine-circles-hell-mode .subpage-video-frame {
     border: 3px solid #ff2222 !important;
     box-shadow: 0 0 35px rgba(255, 0, 0, 0.4) !important;
@@ -166,296 +340,21 @@ body.nine-circles-hell-mode .back-btn:hover {
     box-shadow: 0 0 20px #ff2222 !important;
 }
 
-/* Dynamic pulse keyframe adjustments */
-@keyframes nc-pulse {
+/* ==========================================================================
+   DYNAMIC HARD ANIMATION KEYFRAMES
+   ========================================================================== */
+
+/* Authentic Wave Background Pulse Loop */
+@keyframes nc-wave-strobe {
+    0% { background: radial-gradient(circle at center, #1a0202 0%, #050101 100%) !important; }
+    25% { background: radial-gradient(circle at center, #4a0404 0%, #0a0101 100%) !important; }
+    50% { background: radial-gradient(circle at center, #7f0707 0%, #100101 100%) !important; }
+    75% { background: radial-gradient(circle at center, #300202 0%, #050101 100%) !important; }
+    100% { background: radial-gradient(circle at center, #1a0202 0%, #050101 100%) !important; }
+}
+
+/* Text Header Pulsation Filter */
+@keyframes nc-text-pulse {
     0% { transform: scale(1); text-shadow: 0 0 10px #ff0000, 0 0 20px #990000; }
     100% { transform: scale(1.02); text-shadow: 0 0 20px #ff4444, 0 0 35px #ff0000, 0 0 50px #990000; }
 }
-/* ==========================================================================
-   NINE CIRCLES SPECIAL HELLISH OVERRIDE STYLES
-   ========================================================================== */
-
-/* The main container background wrapper override */
-.nine-circles-hell-mode {
-    background: radial-gradient(circle at center, #2a0808 0%, #0a0202 100%) !important;
-    transition: background 0.8s ease;
-}
-
-/* Make the title flash glowing crimson red */
-.nine-circles-hell-mode .subpage-header h2 {
-    color: #ff3333 !important;
-    text-shadow: 0 0 10px #ff0000, 0 0 20px #990000;
-    font-family: 'Impact', 'Arial Black', sans-serif;
-    letter-spacing: 2px;
-    animation: nc-pulse 2s infinite alternate;
-}
-
-/* Turn the metrics layout panels into glowing metal frames */
-.nine-circles-hell-mode .metric-card {
-    background: #140505 !important;
-    border: 2px solid #ff2222 !important;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.15);
-}
-
-.nine-circles-hell-mode .metric-card strong {
-    color: #ff4444 !important;
-    text-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
-}
-
-/* The thoughts blockquote area */
-.nine-circles-hell-mode .thoughts-box {
-    border-left: 3px solid #ff2222 !important;
-    color: #fca5a5 !important;
-    background: rgba(255, 0, 0, 0.03);
-    padding: 10px 15px;
-}
-
-/* Make the video player outline snap with red electricity */
-.nine-circles-hell-mode .subpage-video-frame {
-    border: 2px solid #ff2222 !important;
-    box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
-}
-
-/* Turn the return button dark red */
-.nine-circles-hell-mode .back-btn {
-    background-color: #1a0606 !important;
-    border: 1px solid #ff3333 !important;
-}
-.nine-circles-hell-mode .back-btn:hover {
-    background-color: #ff2222 !important;
-    color: #000 !important;
-    box-shadow: 0 0 15px #ff2222;
-}
-
-/* Subtle atmospheric wave pulsing keyframes animation */
-@keyframes nc-pulse {
-    0% { text-shadow: 0 0 10px #ff0000, 0 0 20px #990000; }
-    100% { text-shadow: 0 0 15px #ff4444, 0 0 30px #ff0000, 0 0 40px #990000; }
-}
-/* Floating Visitor Counter Badge */
-.visitor-counter-badge {
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
-    background-color: #181b22;
-    border: 1px solid var(--border-color);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    z-index: 9999;
-    letter-spacing: 0.5px;
-    pointer-events: none; /* Keeps it non-intrusive */
-}
-.visitor-counter-badge span {
-    color: var(--accent-color);
-    font-weight: bold;
-    margin-left: 4px;
-}
-:root {
-    --bg-color: #0a0b0d;
-    --container-bg: #111317;
-    --accent-color: #5865F2;
-    --accent-glow: rgba(88, 101, 242, 0.5);
-    --text-main: #f3f4f6;
-    --text-muted: #9ca3af;
-    --border-color: #1f2937;
-    --row-hover: #16191f;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    padding: 3rem 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-}
-
-.container {
-    width: 100%;
-    max-width: 850px;
-    background-color: var(--container-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 2.5rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-    margin-bottom: 2rem;
-}
-
-/* --- Main Creator+ Glowing Header --- */
-header {
-    text-align: center;
-    margin-bottom: 2.5rem;
-}
-
-header h1 {
-    font-size: 3.5rem;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 0.75rem;
-    display: inline-block;
-    text-shadow: 0 0 15px var(--accent-glow), 0 0 30px var(--accent-glow);
-}
-
-header p {
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.5;
-}
-
-/* --- Navigation Buttons Grid --- */
-.nav-menu {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 2.5rem;
-}
-
-.nav-btn {
-    display: block;
-    text-align: center;
-    background-color: #181b22;
-    color: var(--text-muted);
-    border: 1px solid var(--border-color);
-    padding: 0.8rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.nav-btn:hover {
-    color: #fff;
-    border-color: var(--accent-color);
-    background-color: var(--row-hover);
-}
-
-.nav-btn.active {
-    background-color: var(--accent-color);
-    color: #fff;
-    border-color: var(--accent-color);
-    box-shadow: 0 0 12px var(--accent-glow);
-}
-
-/* --- List Tables --- */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-}
-
-th {
-    background-color: #181b22;
-    color: var(--text-muted);
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    padding: 1rem;
-    border-bottom: 2px solid var(--border-color);
-}
-
-td {
-    padding: 1rem;
-    border-bottom: 1px solid var(--border-color);
-    font-size: 0.95rem;
-    vertical-align: middle;
-}
-
-tr:hover td {
-    background-color: var(--row-hover);
-}
-
-.rank-col {
-    font-weight: bold;
-    font-size: 1.1rem;
-    width: 80px;
-    text-align: center;
-}
-
-tr:nth-child(1) .rank-col { color: #ffd700; text-shadow: 0 0 8px rgba(255, 215, 0, 0.4); }
-tr:nth-child(2) .rank-col { color: #c0c0c0; text-shadow: 0 0 8px rgba(192, 192, 192, 0.4); }
-tr:nth-child(3) .rank-col { color: #cd7f32; text-shadow: 0 0 8px rgba(205, 127, 50, 0.4); }
-
-.level-name { font-weight: 600; color: #fff; }
-.creator-name { color: var(--text-muted); font-size: 0.9rem; }
-
-/* --- Difficulty Text Gradients --- */
-.diff-tag {
-    font-weight: bold;
-    display: inline-block;
-    background-size: 100%;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    -webkit-text-fill-color: transparent; 
-    -moz-text-fill-color: transparent;
-}
-.easy-demon { background-image: linear-gradient(45deg, #5c3f70, #51438c); }
-.medium-demon { background-image: linear-gradient(45deg, #9b3f9e, #b33992); }
-.hard-demon { background-image: linear-gradient(45deg, #ba2d2d, #ba2d50); }
-
-.showcase-cell { display: flex; align-items: center; gap: 15px; }
-.yt-thumb { width: 80px; height: 45px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border-color); }
-
-.video-link {
-    display: inline-block;
-    background-color: #3b6770;
-    color: white;
-    text-decoration: none;
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    font-weight: bold;
-    transition: background 0.2s;
-}
-.video-link:hover { background-color: #3aabc2; }
-.no-link { color: var(--text-muted); font-style: italic; }
-.disclaimer-note { margin-top: 1.5rem; text-align: center; font-size: 0.9rem; color: var(--text-muted); font-style: italic; }
-
-/* --- Bottom Goals Section Layout --- */
-.goals-section {
-    margin-top: 1rem;
-    border-top: 1px solid var(--border-color);
-    padding-top: 2rem;
-}
-
-.goals-section h3 {
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #fff;
-}
-
-.goal-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background-color: #14161d;
-    padding: 0.85rem 1rem;
-    border-radius: 6px;
-    margin-bottom: 10px;
-    border-left: 4px solid var(--border-color);
-}
-
-.goal-item.completed { border-left-color: #10b981; color: var(--text-muted); }
-.goal-item.in-progress { border-left-color: #f59e0b; }
-.status-badge { font-size: 0.75rem; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-left: auto; }
-.completed .status-badge { background-color: rgba(16, 185, 129, 0.2); color: #10b981; }
-.in-progress .status-badge { background-color: rgba(245, 158, 11, 0.2); color: #f59e0b; }
