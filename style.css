@@ -1,13 +1,16 @@
 .diff-tag.hard-demon {
-    background-color: rgba(239, 68, 68, 0.1) !important;
-    border: none !important;                /* Destroys the ugly outer border entirely */
-    outline: none !important;               /* Failsafe to remove any hidden outline boxes */
-    color: #ff6b6b !important;
-    font-family: inherit !important;        /* Forces it to use the exact same font as the rest of the line */
-    font-size: inherit !important;          /* Keeps the text size identical to your other tags */
-    font-weight: bold !important;
-    padding: 0 !important;                  /* Strips out the boxy spacing */
-    background: none !important;            /* If you just want pure clean text without any box background */
+    display: inline !important;             /* Ensures it renders right in line with the text */
+    visibility: visible !important;         /* Forces the browser to draw it */
+    color: #ff5555 !important;              /* Sleek crimson red text color */
+    font-family: inherit !important;        /* Matches your site's font perfectly */
+    font-size: inherit !important;          /* Matches the surrounding text size */
+    font-weight: bold !important;           /* Makes it pop */
+    
+    /* Completely clears out the broken background box */
+    background: transparent !important;     
+    border: none !important;                
+    outline: none !important;               
+    padding: 0 !important;                  
 }
 /* ==========================================================================
    TOTAL GLOBAL HELL MODE OVERRIDE FOR NINE CIRCLES
