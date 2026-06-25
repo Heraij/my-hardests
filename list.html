@@ -172,15 +172,27 @@
                     let diffHtml = '';
 if (item.difficulty) {
     const clean = item.difficulty.toLowerCase().trim();
-    
     let gClass = '';
-    if (clean.includes('easy')) gClass = 'easy-demon';
-    else if (clean.includes('medium')) gClass = 'medium-demon';
-    else if (clean.includes('hard')) gClass = 'hard-demon';
-    else if (clean.includes('insane')) gClass = 'insane-demon';
-    else if (clean.includes('extreme')) gClass = 'extreme-demon';
     
-    diffHtml = ` • <span class="diff-tag ${gClass}">${item.difficulty}</span>`;
+    // Explicit priority execution order checking
+    if (clean.includes('extreme')) {
+        gClass = 'extreme-demon';
+    } else if (clean.includes('insane')) {
+        gClass = 'insane-demon';
+    } else if (clean.includes('medium')) {
+        gClass = 'medium-demon';
+    } else if (clean.includes('easy')) {
+        gClass = 'easy-demon';
+    } else if (clean.includes('hard')) {
+        gClass = 'hard-demon';
+    }
+    
+    // Fallback: If it's a valid difficulty string but somehow skipped the layout tags
+    if (gClass !== '') {
+        diffHtml = ` • <span class="diff-tag ${gClass}">${item.difficulty}</span>`;
+    } else {
+        diffHtml = ` • <span class="diff-tag">${item.difficulty}</span>`;
+    }
 }
                     
                     const vId = getYouTubeId(item.video);
