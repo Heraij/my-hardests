@@ -1,23 +1,28 @@
-/* Extreme Demon - Crisp and sharp text */
+/* Extreme Demon - 100% Sharp with a Solid Outer Stroke */
 .diff-tag.extreme-demon {
     display: inline !important;
     visibility: visible !important;
     color: #ffffff !important;
-    /* We drop the blur radius to 2px and add a darker background tone behind the font */
-    text-shadow: 0 0 2px #ff0000, 0 0 5px #7f0000 !important; 
     font-family: inherit !important;
     font-size: inherit !important;
     font-weight: bold !important;
+    
+    /* This creates a sharp 1px solid red outline around the white text with ZERO blur */
+    text-shadow: none !important;
+    -webkit-text-stroke: 1px #ff1a1a !important; 
+    text-stroke: 1px #ff1a1a !important;
 }
 
-/* Insane Demon - Sharp and clean */
+/* Insane Demon - Base structural fallback */
 .diff-tag.insane-demon {
     display: inline !important;
     visibility: visible !important;
-    color: #ff4ef8 !important; /* Slightly brighter magenta for readability */
+    color: #ff4ef8 !important; 
     font-family: inherit !important;
     font-size: inherit !important;
     font-weight: bold !important;
+    text-shadow: none !important;
+    -webkit-text-stroke: 0px !important;
 }
 
 /* Hard Demon - Sharp and clean */
