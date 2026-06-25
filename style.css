@@ -1,44 +1,33 @@
-.diff-tag.hard-demon {
-    display: inline !important;             /* Ensures it renders right in line with the text */
-    visibility: visible !important;         /* Forces the browser to draw it */
-    color: #ff5555 !important;              /* Sleek crimson red text color */
-    font-family: inherit !important;        /* Matches your site's font perfectly */
-    font-size: inherit !important;          /* Matches the surrounding text size */
-    font-weight: bold !important;           /* Makes it pop */
-    
-    /* Completely clears out the broken background box */
-    background: transparent !important;     
-    border: none !important;                
-    outline: none !important;               
-    padding: 0 !important;                  
-}
-/* Insane Demon List Tag Styling */
-.diff-tag.insane-demon {
-    display: inline !important;
-    visibility: visible !important;
-    color: #d946ef !important;              /* Vibrant Insane Demon Magenta/Pink */
-    font-family: inherit !important;
-    font-size: inherit !important;
-    font-weight: bold !important;
-    background: transparent !important;
-    border: none !important;
-    outline: none !important;
-    padding: 0 !important;
-}
-
-/* Extreme Demon List Tag Styling */
+/* Extreme Demon - Crisp and sharp text */
 .diff-tag.extreme-demon {
     display: inline !important;
     visibility: visible !important;
-    color: #ffffff !important;              /* Clean white text base */
-    text-shadow: 0 0 4px #ff0000 !important; /* Aggressive dark red glow aura */
+    color: #ffffff !important;
+    /* We drop the blur radius to 2px and add a darker background tone behind the font */
+    text-shadow: 0 0 2px #ff0000, 0 0 5px #7f0000 !important; 
     font-family: inherit !important;
     font-size: inherit !important;
     font-weight: bold !important;
-    background: transparent !important;
-    border: none !important;
-    outline: none !important;
-    padding: 0 !important;
+}
+
+/* Insane Demon - Sharp and clean */
+.diff-tag.insane-demon {
+    display: inline !important;
+    visibility: visible !important;
+    color: #ff4ef8 !important; /* Slightly brighter magenta for readability */
+    font-family: inherit !important;
+    font-size: inherit !important;
+    font-weight: bold !important;
+}
+
+/* Hard Demon - Sharp and clean */
+.diff-tag.hard-demon {
+    display: inline !important;
+    visibility: visible !important;
+    color: #ff4444 !important;
+    font-family: inherit !important;
+    font-size: inherit !important;
+    font-weight: bold !important;
 }
 /* ==========================================================================
    TOTAL GLOBAL HELL MODE OVERRIDE FOR NINE CIRCLES
