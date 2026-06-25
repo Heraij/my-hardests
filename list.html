@@ -194,44 +194,50 @@
 
             // 2. Build full dedicated screen layout view for target individual completions
             function renderLevelSubpage(indexOffset) {
-                const item = DATA.demonlist[indexOffset];
-                const videoId = getYouTubeId(item.video);
-                
-                // Fallbacks in case an array item lacks explicit parameter metrics
-                const enjoyment = item.enjoyment || "N/A";
-                const attempts = item.attempts ? item.attempts.toLocaleString() : "N/A";
-                const dateAdded = item.dateAdded || "Unspecified Date";
-                const thoughts = item.thoughts || "No custom analytical thoughts left for this entry.";
+    const item = DATA.demonlist[indexOffset];
+    const videoId = getYouTubeId(item.video);
+    
+    // NAME-BASED CHECKER: Checks the title directly (ignoring spaces or capital letters)
+    if (item.level.toLowerCase().trim() === "nine circles") {
+        document.body.classList.add('nine-circles-hell-mode');
+    } else {
+        document.body.classList.remove('nine-circles-hell-mode');
+    }
 
-                singleView.innerHTML = `
-                    <div class="subpage-header">
-                        <h2>${item.level}</h2>
-                        <p>Completed Hardest Ranked #${indexOffset + 1} • by ${item.creator}</p>
-                    </div>
+    const enjoyment = item.enjoyment || "N/A";
+    const attempts = item.attempts ? item.attempts.toLocaleString() : "N/A";
+    const dateAdded = item.dateAdded || "Unspecified Date";
+    const thoughts = item.thoughts || "No custom analytical thoughts left for this entry.";
 
-                    <div class="subpage-video-frame">
-                        ${videoId ? `
-                            <iframe 
-                                src="https://www.youtube.com/embed/${videoId}" 
-                                title="Completion Showcase Video" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                            </iframe>` : `<div style="display:flex; align-items:center; justify-content:center; height:100%; color:var(--text-muted);">No showcase video available.</div>`}
-                    </div>
+    singleView.innerHTML = `
+        <div class="subpage-header">
+            <h2>${item.level}</h2>
+            <p>Completed Hardest Ranked #${indexOffset + 1} • by ${item.creator}</p>
+        </div>
 
-                    <div class="metrics-row">
-                        <div class="metric-card"><span>Enjoyability</span><strong>${enjoyment}</strong></div>
-                        <div class="metric-card"><span>Attempts</span><strong>${attempts}</strong></div>
-                        <div class="metric-card"><span>Date Logged</span><strong>${dateAdded}</strong></div>
-                    </div>
+        <div class="subpage-video-frame">
+            ${videoId ? `
+                <iframe 
+                    src="https://www.youtube.com/embed/${videoId}" 
+                    title="Completion Showcase Video" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>` : `<div style="display:flex; align-items:center; justify-content:center; height:100%; color:var(--text-muted);">No showcase video available.</div>`}
+        </div>
 
-                    <div class="thoughts-box">
-                        "${thoughts}"
-                    </div>
+        <div class="metrics-row">
+            <div class="metric-card"><span>Enjoyability</span><strong>${enjoyment}</strong></div>
+            <div class="metric-card"><span>Attempts</span><strong>${attempts}</strong></div>
+            <div class="metric-card"><span>Date Logged</span><strong>${dateAdded}</strong></div>
+        </div>
 
-                    <a href="list.html" class="back-btn">← Return to List</a>
-                `;
-            }
+        <div class="thoughts-box">
+            "${thoughts}"
+        </div>
+
+        <a href="list.html" class="back-btn">← Return to List</a>
+    `;
+}
         };
     </script>
 </body>
