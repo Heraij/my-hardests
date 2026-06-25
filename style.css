@@ -1,16 +1,16 @@
-/* Extreme Demon - 100% Sharp with a Solid Outer Stroke */
+/* Extreme Demon - Clean White with a Dark Outline */
 .diff-tag.extreme-demon {
     display: inline !important;
     visibility: visible !important;
-    color: #ffffff !important;
+    color: #ffffff !important;         /* Pure crisp white font text */
     font-family: inherit !important;
     font-size: inherit !important;
     font-weight: bold !important;
-    
-    /* This creates a sharp 1px solid red outline around the white text with ZERO blur */
     text-shadow: none !important;
-    -webkit-text-stroke: 1px #ff1a1a !important; 
-    text-stroke: 1px #ff1a1a !important;
+    
+    /* A dark, heavy border outline around the clean white letters */
+    -webkit-text-stroke: 1px #8b0000 !important; 
+    text-stroke: 1px #8b0000 !important;
 }
 
 /* Insane Demon - Base structural fallback */
