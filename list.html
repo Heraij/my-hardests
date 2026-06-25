@@ -173,13 +173,12 @@
 if (item.difficulty) {
     const clean = item.difficulty.toLowerCase().trim();
     
-    // Assign the proper class name based on game difficulty settings
     let gClass = '';
-    if (clean === 'easy demon') gClass = 'easy-demon';
-    else if (clean === 'medium demon') gClass = 'medium-demon';
-    else if (clean === 'hard demon') gClass = 'hard-demon';
-    else if (clean === 'insane demon') gClass = 'insane-demon';   // Added!
-    else if (clean === 'extreme demon') gClass = 'extreme-demon'; // Added!
+    if (clean.includes('easy')) gClass = 'easy-demon';
+    else if (clean.includes('medium')) gClass = 'medium-demon';
+    else if (clean.includes('hard')) gClass = 'hard-demon';
+    else if (clean.includes('insane')) gClass = 'insane-demon';
+    else if (clean.includes('extreme')) gClass = 'extreme-demon';
     
     diffHtml = ` • <span class="diff-tag ${gClass}">${item.difficulty}</span>`;
 }
