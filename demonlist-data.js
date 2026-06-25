@@ -15,6 +15,26 @@ const DATA = {
 
     demonlist: [
         { 
+            "level": "Test - Extreme", 
+            "creator": "Zobros", 
+            "difficulty": "Extreme Demon", 
+            "video": "https://youtu.be/aTObXPHFEPw",
+            "enjoyment": "7/10",
+            "attempts": 778,
+            "dateAdded": "June 25, 2026",
+            "thoughts": "It just kept getting worse and worse, first 86%, then 87%,,, and 87% once more."
+        },
+        { 
+            "level": "Test - Insane", 
+            "creator": "Zobros", 
+            "difficulty": "Insane Demon", 
+            "video": "https://youtu.be/aTObXPHFEPw",
+            "enjoyment": "7/10",
+            "attempts": 778,
+            "dateAdded": "June 25, 2026",
+            "thoughts": "It just kept getting worse and worse, first 86%, then 87%,,, and 87% once more."
+        },
+        { 
             "level": "Nine Circles", 
             "creator": "Zobros", 
             "difficulty": "Hard Demon", 
