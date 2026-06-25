@@ -177,7 +177,9 @@ if (item.difficulty) {
     let gClass = '';
     if (clean === 'easy demon') gClass = 'easy-demon';
     else if (clean === 'medium demon') gClass = 'medium-demon';
-    else if (clean === 'hard demon') gClass = 'hard-demon'; // Added this line!
+    else if (clean === 'hard demon') gClass = 'hard-demon';
+    else if (clean === 'insane demon') gClass = 'insane-demon';   // Added!
+    else if (clean === 'extreme demon') gClass = 'extreme-demon'; // Added!
     
     diffHtml = ` • <span class="diff-tag ${gClass}">${item.difficulty}</span>`;
 }
