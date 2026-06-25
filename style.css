@@ -1,3 +1,64 @@
+/* ==========================================================================
+   NINE CIRCLES SPECIAL HELLISH OVERRIDE STYLES
+   ========================================================================== */
+
+/* The main container background wrapper override */
+.nine-circles-hell-mode {
+    background: radial-gradient(circle at center, #2a0808 0%, #0a0202 100%) !important;
+    transition: background 0.8s ease;
+}
+
+/* Make the title flash glowing crimson red */
+.nine-circles-hell-mode .subpage-header h2 {
+    color: #ff3333 !important;
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #990000;
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    letter-spacing: 2px;
+    animation: nc-pulse 2s infinite alternate;
+}
+
+/* Turn the metrics layout panels into glowing metal frames */
+.nine-circles-hell-mode .metric-card {
+    background: #140505 !important;
+    border: 2px solid #ff2222 !important;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.15);
+}
+
+.nine-circles-hell-mode .metric-card strong {
+    color: #ff4444 !important;
+    text-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
+}
+
+/* The thoughts blockquote area */
+.nine-circles-hell-mode .thoughts-box {
+    border-left: 3px solid #ff2222 !important;
+    color: #fca5a5 !important;
+    background: rgba(255, 0, 0, 0.03);
+    padding: 10px 15px;
+}
+
+/* Make the video player outline snap with red electricity */
+.nine-circles-hell-mode .subpage-video-frame {
+    border: 2px solid #ff2222 !important;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
+}
+
+/* Turn the return button dark red */
+.nine-circles-hell-mode .back-btn {
+    background-color: #1a0606 !important;
+    border: 1px solid #ff3333 !important;
+}
+.nine-circles-hell-mode .back-btn:hover {
+    background-color: #ff2222 !important;
+    color: #000 !important;
+    box-shadow: 0 0 15px #ff2222;
+}
+
+/* Subtle atmospheric wave pulsing keyframes animation */
+@keyframes nc-pulse {
+    0% { text-shadow: 0 0 10px #ff0000, 0 0 20px #990000; }
+    100% { text-shadow: 0 0 15px #ff4444, 0 0 30px #ff0000, 0 0 40px #990000; }
+}
 /* Floating Visitor Counter Badge */
 .visitor-counter-badge {
     position: fixed;
