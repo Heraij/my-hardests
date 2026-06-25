@@ -1,3 +1,9 @@
+/* Hard Demon List Tag Styling */
+.diff-tag.hard-demon {
+    background-color: rgba(185, 28, 28, 0.2); /* Soft dark crimson */
+    border: 1px solid #ef4444;                 /* Bright red border */
+    color: #f87171;                            /* Vibrant red text */
+}
 /* ==========================================================================
    TOTAL GLOBAL HELL MODE OVERRIDE FOR NINE CIRCLES
    ========================================================================== */
