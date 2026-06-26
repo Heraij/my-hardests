@@ -1,57 +1,10 @@
 /* ==========================================================================
-   RESPONSIVE CARD GRID LAYOUT
-   ========================================================================== */
-.list-grid-container {
-    display: grid;
-    grid-template-columns: 1fr; /* Stack layout on thin screens */
-    gap: 14px;
-    margin-top: 20px;
-}
-
-/* Base Level Card View - Matches your Goals UI template styling */
-.level-card {
-    display: flex;
-    align-items: center;
-    padding: 18px;
-    background-color: #12161f;
-    border: 1px solid #1c212c;
-    border-radius: 6px;
-    transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.level-card:hover {
-    transform: translateY(-2px);
-    border-color: #2d3545;
-}
-
-/* Aligns the yellow/silver/orange ranking labels on the left side of cards */
-.card-rank {
-    font-size: 1.4rem;
-    font-weight: 800;
-    min-width: 55px;
-    text-align: left;
-}
-
-.card-details {
-    display: flex;
-    flex-direction: column;
-}
-
-/* ==========================================================================
-   HELL MODE CARDS OVERRIDE (For Nine Circles Viewport Switch)
-   ========================================================================== */
-body.nine-circles-hell-mode .level-card {
-    background-color: #140505 !important;
-    border: 2px solid #ff2222 !important;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.15) !important;
-}
-/* ==========================================================================
-   1. CORE SITE THEME & RESPONSIVE LAYOUT
+   1. GLOBAL BASE & CORE LAYOUT
    ========================================================================== */
 body {
-    background-color: #0b0e14; /* Deep matte dark background from screenshots */
-    color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #0b0e14; /* Pure dark matte background from images */
+    color: #ffffff;            /* True white text */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 24px;
     line-height: 1.5;
@@ -61,37 +14,93 @@ body {
 .container {
     max-width: 850px;
     margin: 0 auto;
-    background-color: #12161f; /* Slightly lighter dark gray panel background */
-    padding: 30px;
-    border-radius: 6px;
-    border: 1px solid #1c212c;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-header h1 {
-    font-size: 1.8rem;
+/* Page Title Layout ("GD GOALS", etc.) */
+h1, h2, .subpage-header h2 {
+    font-size: 1.6rem;
     font-weight: 800;
     letter-spacing: 0.5px;
-    margin-top: 0;
-    margin-bottom: 8px;
+    text-transform: uppercase;
     color: #ffffff;
-}
-
-header p {
-    color: #6b7280;
-    margin-bottom: 24px;
-    font-size: 0.95rem;
+    margin-top: 0;
+    margin-bottom: 20px;
 }
 
 /* ==========================================================================
-   2. NAVIGATION MENU SYSTEM
+   2. REFINED CARDS VIEWPORT LAYOUT (Matches image_900ae1.png)
+   ========================================================================== */
+.list-grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+/* Standard Base Card Structure */
+.level-card, .goal-item {
+    display: flex;
+    align-items: center;
+    padding: 18px 24px;
+    background-color: #12161f; /* Dark card color */
+    border-radius: 6px;
+    border-left: 4px solid #f0883e; /* Signature orange indicator strip */
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+/* Card Hover States */
+.level-card:hover {
+    transform: translateY(-2px);
+    background-color: #161b26;
+}
+
+/* Dynamic Left Indicator Strips based on status/ranking */
+.level-card.rank-1 { border-left-color: #facc15; } /* #1 Gold */
+.level-card.rank-2 { border-left-color: #94a3b8; } /* #2 Silver */
+.level-card.rank-3 { border-left-color: #f0883e; } /* #3 Orange */
+.goal-item.done    { border-left-color: #0d9488; } /* Done Status Teal */
+
+/* Internal Typography & Links inside Cards */
+.card-rank {
+    font-size: 1.3rem;
+    font-weight: 800;
+    min-width: 55px;
+}
+.level-card.rank-1 .card-rank { color: #facc15; }
+.level-card.rank-2 .card-rank { color: #94a3b8; }
+.level-card.rank-3 .card-rank { color: #f0883e; }
+
+.card-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.level-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 2px;
+}
+
+.level-link:hover {
+    text-decoration: underline;
+}
+
+.creator-text {
+    font-size: 0.9rem;
+    color: #8b949e;
+}
+
+/* ==========================================================================
+   3. NAVIGATION BUTTON SYSTEM
    ========================================================================== */
 .nav-menu {
     display: flex;
     gap: 10px;
     margin-bottom: 25px;
-    border-bottom: 1px solid #1c212c;
-    padding-bottom: 15px;
 }
 
 .nav-btn {
@@ -109,64 +118,16 @@ header p {
 
 .nav-btn:hover {
     background-color: #1c212c;
-    border-color: #4b5563;
 }
 
 .nav-btn.active {
-    background-color: #f0883e; /* Original theme orange active tab */
+    background-color: #f0883e;
     border-color: #f0883e;
     color: #ffffff;
 }
 
 /* ==========================================================================
-   3. MAIN TABLE & LIST ITEMS
-   ========================================================================== */
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-tr {
-    border-bottom: 1px solid #1c212c;
-}
-
-td {
-    padding: 16px 8px;
-    vertical-align: middle;
-}
-
-.rank-col {
-    width: 60px;
-    font-size: 1.25rem;
-    font-weight: 800;
-    text-align: center;
-}
-
-/* Ranks colors matching your goals page styles */
-tr:nth-child(1) .rank-col { color: #facc15; } /* #1 Yellow */
-tr:nth-child(2) .rank-col { color: #94a3b8; } /* #2 Silver-gray */
-tr:nth-child(3) .rank-col { color: #f0883e; } /* #3 Orange */
-
-.level-link {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.1rem;
-    display: inline-block;
-}
-
-.level-link:hover {
-    text-decoration: underline;
-}
-
-.creator-text {
-    font-size: 0.88rem;
-    color: #9ca3af;
-    margin-top: 4px;
-}
-
-/* ==========================================================================
-   4. CRUCIAL DIFFICULTY DEMON TAGS
+   4. GRADIENT DIFFICULTY TAGS SYSTEM
    ========================================================================== */
 .diff-tag {
     font-family: inherit !important;
@@ -176,32 +137,14 @@ tr:nth-child(3) .rank-col { color: #f0883e; } /* #3 Orange */
     -webkit-text-stroke: none !important;
     text-stroke: none !important;
     background: transparent !important;
-    border: none !important;
-    outline: none !important;
-    padding: 0 !important;
 }
 
-.diff-tag.easy-demon {
-    display: inline !important;
-    visibility: visible !important;
-    color: #4ade80 !important;
-}
-
-.diff-tag.medium-demon {
-    display: inline !important;
-    visibility: visible !important;
-    color: #38bdf8 !important;
-}
-
-.diff-tag.hard-demon {
-    display: inline !important;
-    visibility: visible !important;
-    color: #ef4444 !important;
-}
+.diff-tag.easy-demon   { color: #4ade80 !important; }
+.diff-tag.medium-demon { color: #38bdf8 !important; }
+.diff-tag.hard-demon   { color: #ff4444 !important; }
 
 .diff-tag.insane-demon {
     display: inline-block !important;
-    visibility: visible !important;
     background: linear-gradient(180deg, #910404 0%, #913804 100%) !important;
     -webkit-background-clip: text !important;
     background-clip: text !important;
@@ -210,7 +153,6 @@ tr:nth-child(3) .rank-col { color: #f0883e; } /* #3 Orange */
 
 .diff-tag.extreme-demon {
     display: inline-block !important;
-    visibility: visible !important;
     background: linear-gradient(180deg, #5e040e 0%, #5e041f 100%) !important;
     -webkit-background-clip: text !important;
     background-clip: text !important;
@@ -218,25 +160,7 @@ tr:nth-child(3) .rank-col { color: #f0883e; } /* #3 Orange */
 }
 
 /* ==========================================================================
-   5. GOALS TRACKER ELEMENT OVERRIDES
-   ========================================================================== */
-.goal-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px;
-    background-color: #12161f;
-    border-radius: 6px;
-    margin-bottom: 12px;
-    border-left: 4px solid #f0883e;
-}
-
-.goal-item.done {
-    border-left-color: #0d9488; /* Teal color line from your completion screen */
-}
-
-/* ==========================================================================
-   6. NINE CIRCLES GLOBAL HELL MODE (STAYS WORKING)
+   5. NINE CIRCLES GLOBAL HELL MODE (STAYS FUNCTIONAL)
    ========================================================================== */
 body.nine-circles-hell-mode {
     color: #f87171 !important;
@@ -244,21 +168,18 @@ body.nine-circles-hell-mode {
     animation: nc-wave-strobe 1.4s infinite linear !important;
 }
 
+body.nine-circles-hell-mode .level-card,
 body.nine-circles-hell-mode .container {
     background: rgba(10, 2, 2, 0.85) !important;
     border: 2px solid #ff2222 !important;
-    box-shadow: 0 0 40px rgba(255, 0, 0, 0.25), inset 0 0 20px rgba(0, 0, 0, 0.9) !important;
-    backdrop-filter: blur(8px);
+    box-shadow: 0 0 40px rgba(255, 0, 0, 0.25) !important;
 }
 
+body.nine-circles-hell-mode h1,
 body.nine-circles-hell-mode .subpage-header h2 {
     color: #ff3333 !important;
-    text-shadow: 0 0 10px #ff0000, 0 0 20px #990000, 0 0 40px #ff5555 !important;
-    font-family: 'Impact', 'Arial Black', sans-serif !important;
-    font-size: 3rem !important;
-    letter-spacing: 3px !important;
-    text-transform: uppercase;
-    animation: nc-text-pulse 1.5s infinite alternate !important;
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #990000 !important;
+    font-family: 'Impact', sans-serif !important;
 }
 
 @keyframes nc-wave-strobe {
@@ -267,9 +188,4 @@ body.nine-circles-hell-mode .subpage-header h2 {
     50% { background: radial-gradient(circle at center, #7f0707 0%, #100101 100%) !important; }
     75% { background: radial-gradient(circle at center, #300202 0%, #050101 100%) !important; }
     100% { background: radial-gradient(circle at center, #1a0202 0%, #050101 100%) !important; }
-}
-
-@keyframes nc-text-pulse {
-    0% { transform: scale(1); text-shadow: 0 0 10px #ff0000, 0 0 20px #990000; }
-    100% { transform: scale(1.02); text-shadow: 0 0 20px #ff4444, 0 0 35px #ff0000, 0 0 50px #990000; }
 }
