@@ -1,4 +1,51 @@
 /* ==========================================================================
+   RESPONSIVE CARD GRID LAYOUT
+   ========================================================================== */
+.list-grid-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Stack layout on thin screens */
+    gap: 14px;
+    margin-top: 20px;
+}
+
+/* Base Level Card View - Matches your Goals UI template styling */
+.level-card {
+    display: flex;
+    align-items: center;
+    padding: 18px;
+    background-color: #12161f;
+    border: 1px solid #1c212c;
+    border-radius: 6px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.level-card:hover {
+    transform: translateY(-2px);
+    border-color: #2d3545;
+}
+
+/* Aligns the yellow/silver/orange ranking labels on the left side of cards */
+.card-rank {
+    font-size: 1.4rem;
+    font-weight: 800;
+    min-width: 55px;
+    text-align: left;
+}
+
+.card-details {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   HELL MODE CARDS OVERRIDE (For Nine Circles Viewport Switch)
+   ========================================================================== */
+body.nine-circles-hell-mode .level-card {
+    background-color: #140505 !important;
+    border: 2px solid #ff2222 !important;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.15) !important;
+}
+/* ==========================================================================
    1. CORE SITE THEME & RESPONSIVE LAYOUT
    ========================================================================== */
 body {
