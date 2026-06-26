@@ -1,93 +1,111 @@
 /* ==========================================================================
-   GLOBAL BASE LAYOUT & NAVIGATION
+   1. CORE SITE THEME & RESPONSIVE LAYOUT
    ========================================================================== */
 body {
-    background-color: #0d1117;
-    color: #c9d1d9;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background-color: #0b0e14; /* Deep matte dark background from screenshots */
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
-    padding: 20px;
-    transition: background 0.5s ease, color 0.5s ease;
+    padding: 24px;
+    line-height: 1.5;
+    transition: background 0.4s ease;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 850px;
     margin: 0 auto;
-    background: #161b22;
-    padding: 25px;
-    border-radius: 8px;
-    border: 1px solid #30363d;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: all 0.5s ease;
+    background-color: #12161f; /* Slightly lighter dark gray panel background */
+    padding: 30px;
+    border-radius: 6px;
+    border: 1px solid #1c212c;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 header h1 {
-    color: #f0f6fc;
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
     margin-top: 0;
+    margin-bottom: 8px;
+    color: #ffffff;
 }
 
 header p {
-    color: #8b949e;
+    color: #6b7280;
+    margin-bottom: 24px;
+    font-size: 0.95rem;
 }
 
+/* ==========================================================================
+   2. NAVIGATION MENU SYSTEM
+   ========================================================================== */
 .nav-menu {
-    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #1c212c;
+    padding-bottom: 15px;
 }
 
 .nav-btn {
-    background: #21262d;
-    border: 1px solid #30363d;
-    color: #c9d1d9;
+    background-color: #12161f;
+    border: 1px solid #2d3545;
+    color: #ffffff;
     padding: 8px 16px;
     text-decoration: none;
-    border-radius: 6px;
-    margin-right: 8px;
-    display: inline-block;
+    border-radius: 4px;
+    font-size: 0.88rem;
+    font-weight: 700;
     cursor: pointer;
-    font-size: 0.9rem;
+    transition: background-color 0.2s;
 }
 
 .nav-btn:hover {
-    background: #30363d;
-    border-color: #8b949e;
+    background-color: #1c212c;
+    border-color: #4b5563;
 }
 
 .nav-btn.active {
-    background: #1f6feb;
-    border-color: #388bfd;
+    background-color: #f0883e; /* Original theme orange active tab */
+    border-color: #f0883e;
     color: #ffffff;
 }
 
 /* ==========================================================================
-   TABLE & DATA LIST STYLING
+   3. MAIN TABLE & LIST ITEMS
    ========================================================================== */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 15px;
 }
 
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #30363d;
+tr {
+    border-bottom: 1px solid #1c212c;
 }
 
-th {
-    color: #f0f6fc;
-    font-weight: 600;
+td {
+    padding: 16px 8px;
+    vertical-align: middle;
 }
 
 .rank-col {
-    width: 10%;
-    font-weight: bold;
-    color: #f0883e;
+    width: 60px;
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-align: center;
 }
 
+/* Ranks colors matching your goals page styles */
+tr:nth-child(1) .rank-col { color: #facc15; } /* #1 Yellow */
+tr:nth-child(2) .rank-col { color: #94a3b8; } /* #2 Silver-gray */
+tr:nth-child(3) .rank-col { color: #f0883e; } /* #3 Orange */
+
 .level-link {
-    color: #58a6ff;
+    color: #ffffff;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: inline-block;
 }
 
 .level-link:hover {
@@ -95,13 +113,13 @@ th {
 }
 
 .creator-text {
-    font-size: 0.85rem;
-    color: #8b949e;
-    margin-top: 2px;
+    font-size: 0.88rem;
+    color: #9ca3af;
+    margin-top: 4px;
 }
 
 /* ==========================================================================
-   BULLETPROOF DEMON DIFFICULTY TAG SYSTEM
+   4. CRUCIAL DIFFICULTY DEMON TAGS
    ========================================================================== */
 .diff-tag {
     font-family: inherit !important;
@@ -119,23 +137,23 @@ th {
 .diff-tag.easy-demon {
     display: inline !important;
     visibility: visible !important;
-    color: #4ade80 !important; /* Clean operational green */
+    color: #4ade80 !important;
 }
 
 .diff-tag.medium-demon {
     display: inline !important;
     visibility: visible !important;
-    color: #38bdf8 !important; /* Clean operational blue */
+    color: #38bdf8 !important;
 }
 
 .diff-tag.hard-demon {
     display: inline !important;
     visibility: visible !important;
-    color: #ff4444 !important; /* Sharp crimson red */
+    color: #ef4444 !important;
 }
 
 .diff-tag.insane-demon {
-    display: inline-block !important; /* Required for linear-gradients */
+    display: inline-block !important;
     visibility: visible !important;
     background: linear-gradient(180deg, #910404 0%, #913804 100%) !important;
     -webkit-background-clip: text !important;
@@ -144,7 +162,7 @@ th {
 }
 
 .diff-tag.extreme-demon {
-    display: inline-block !important; /* Required for linear-gradients */
+    display: inline-block !important;
     visibility: visible !important;
     background: linear-gradient(180deg, #5e040e 0%, #5e041f 100%) !important;
     -webkit-background-clip: text !important;
@@ -153,89 +171,32 @@ th {
 }
 
 /* ==========================================================================
-   LEVEL DETAILS & INFORMATION SUBPAGE ELEMENTS
+   5. GOALS TRACKER ELEMENT OVERRIDES
    ========================================================================== */
-.subpage-header h2 {
-    font-size: 2rem;
-    margin-bottom: 5px;
-}
-
-.subpage-video-container {
-    width: 100%;
-    margin: 20px 0;
-}
-
-.subpage-video-frame {
-    width: 100%;
-    aspect-ratio: 16 / 9;
+.goal-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background-color: #12161f;
     border-radius: 6px;
-    border: 1px solid #30363d;
+    margin-bottom: 12px;
+    border-left: 4px solid #f0883e;
 }
 
-.metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.metric-card {
-    background: #21262d;
-    border: 1px solid #30363d;
-    padding: 12px;
-    border-radius: 6px;
-}
-
-.metric-card span {
-    display: block;
-    font-size: 0.8rem;
-    color: #8b949e;
-    margin-bottom: 4px;
-}
-
-.metric-card strong {
-    font-size: 1.2rem;
-    color: #c9d1d9;
-}
-
-.thoughts-box {
-    background: rgba(56, 139, 253, 0.05);
-    border-left: 4px solid #1f6feb;
-    padding: 15px;
-    border-radius: 0 6px 6px 0;
-    margin-bottom: 25px;
-    font-style: italic;
-}
-
-.back-btn {
-    display: inline-block;
-    background: #21262d;
-    border: 1px solid #30363d;
-    color: #c9d1d9;
-    padding: 10px 20px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.back-btn:hover {
-    background: #30363d;
+.goal-item.done {
+    border-left-color: #0d9488; /* Teal color line from your completion screen */
 }
 
 /* ==========================================================================
-   TOTAL GLOBAL HELL MODE OVERRIDE FOR NINE CIRCLES
+   6. NINE CIRCLES GLOBAL HELL MODE (STAYS WORKING)
    ========================================================================== */
-
-/* 1. Viewport Animation Triggers */
 body.nine-circles-hell-mode {
     color: #f87171 !important;
     font-family: 'Helvetica Neue', Arial, sans-serif;
     animation: nc-wave-strobe 1.4s infinite linear !important;
-    transition: color 0.5s ease;
 }
 
-/* 2. Layout Container Override */
 body.nine-circles-hell-mode .container {
     background: rgba(10, 2, 2, 0.85) !important;
     border: 2px solid #ff2222 !important;
@@ -243,45 +204,6 @@ body.nine-circles-hell-mode .container {
     backdrop-filter: blur(8px);
 }
 
-/* 3. Header Styling Overrides */
-body.nine-circles-hell-mode header h1 {
-    color: #ffffff !important;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 0 0 20px #ff0000 !important;
-}
-body.nine-circles-hell-mode header p {
-    color: #fca5a5 !important;
-}
-
-/* 4. Navigation Menu Overrides */
-body.nine-circles-hell-mode .nav-menu {
-    border-bottom: 2px dashed #ff3333 !important;
-    padding-bottom: 15px;
-    margin-bottom: 25px;
-}
-
-body.nine-circles-hell-mode .nav-btn {
-    background: #140303 !important;
-    border: 1px solid #7f1d1d !important;
-    color: #ef4444 !important;
-    text-shadow: none !important;
-}
-
-body.nine-circles-hell-mode .nav-btn:hover {
-    background: #ff2222 !important;
-    color: #000000 !important;
-    border-color: #ffffff !important;
-    box-shadow: 0 0 15px #ff2222 !important;
-    font-weight: bold;
-}
-
-body.nine-circles-hell-mode .nav-btn.active {
-    background: linear-gradient(180deg, #7f1d1d 0%, #3b0712 100%) !important;
-    border: 2px solid #ff2222 !important;
-    color: #ffffff !important;
-    box-shadow: 0 0 15px rgba(255, 34, 34, 0.4) !important;
-}
-
-/* 5. Subpage Text Overrides */
 body.nine-circles-hell-mode .subpage-header h2 {
     color: #ff3333 !important;
     text-shadow: 0 0 10px #ff0000, 0 0 20px #990000, 0 0 40px #ff5555 !important;
@@ -292,59 +214,6 @@ body.nine-circles-hell-mode .subpage-header h2 {
     animation: nc-text-pulse 1.5s infinite alternate !important;
 }
 
-body.nine-circles-hell-mode .subpage-header p {
-    color: #fca5a5 !important;
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-}
-
-/* 6. Media Cards & Mechanics Overrides */
-body.nine-circles-hell-mode .subpage-video-frame {
-    border: 3px solid #ff2222 !important;
-    box-shadow: 0 0 35px rgba(255, 0, 0, 0.4) !important;
-}
-
-body.nine-circles-hell-mode .metric-card {
-    background: #140505 !important;
-    border: 2px solid #ff2222 !important;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.2) !important;
-}
-
-body.nine-circles-hell-mode .metric-card span {
-    color: #ef4444 !important;
-    font-weight: bold;
-}
-
-body.nine-circles-hell-mode .metric-card strong {
-    color: #ffffff !important;
-    text-shadow: 0 0 8px #ff3333 !important;
-}
-
-body.nine-circles-hell-mode .thoughts-box {
-    border-left: 4px solid #ff2222 !important;
-    background: linear-gradient(90deg, rgba(255, 0, 0, 0.07) 0%, transparent 100%) !important;
-    color: #fee2e2 !important;
-}
-
-body.nine-circles-hell-mode .back-btn {
-    background-color: #1a0606 !important;
-    border: 2px solid #ff3333 !important;
-    color: #ff3333 !important;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-body.nine-circles-hell-mode .back-btn:hover {
-    background-color: #ff2222 !important;
-    color: #000000 !important;
-    box-shadow: 0 0 20px #ff2222 !important;
-}
-
-/* ==========================================================================
-   DYNAMIC HARD ANIMATION KEYFRAMES
-   ========================================================================== */
-
-/* Authentic Wave Background Pulse Loop */
 @keyframes nc-wave-strobe {
     0% { background: radial-gradient(circle at center, #1a0202 0%, #050101 100%) !important; }
     25% { background: radial-gradient(circle at center, #4a0404 0%, #0a0101 100%) !important; }
@@ -353,7 +222,6 @@ body.nine-circles-hell-mode .back-btn:hover {
     100% { background: radial-gradient(circle at center, #1a0202 0%, #050101 100%) !important; }
 }
 
-/* Text Header Pulsation Filter */
 @keyframes nc-text-pulse {
     0% { transform: scale(1); text-shadow: 0 0 10px #ff0000, 0 0 20px #990000; }
     100% { transform: scale(1.02); text-shadow: 0 0 20px #ff4444, 0 0 35px #ff0000, 0 0 50px #990000; }
